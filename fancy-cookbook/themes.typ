@@ -77,6 +77,7 @@
 
 // this state will get the current color theme
 #let theme-state = state("theme", theme-grey)
+
 #let set-theme(theme) = {
   theme-state.update(theme)
 }
@@ -88,6 +89,7 @@
 
 // this state will get the style of the ingredients block "flat" or "gradient"
 #let style-state = state("style", style.flat)
+
 #let set-style(style) = {
   style-state.update(style)
 }
