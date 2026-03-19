@@ -1,6 +1,6 @@
 [package]
 name = "fancy-cookbook"
-version = "0.1.14"
+version = "0.1.22"
 entrypoint = "fancy-cookbook/main.typ"
 authors = [ "Christophe Dos Santos" ]
 license = "MIT"

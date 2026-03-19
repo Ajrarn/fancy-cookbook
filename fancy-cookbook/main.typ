@@ -195,7 +195,8 @@
     #v(1.5cm)
     
     #show outline.entry: it => {
-      if it.level == 1 {
+      context {
+        if it.level == 1 {
         align(center)[
           #box(width:70%)[
           // Section / Chapter Header
@@ -212,15 +213,17 @@
           // Recipe Entry
           #v(0.5em)
           #box(width: 65%)[
-            #text(font: fonts.body, size: 1.1em, it.element.body)
-            #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ]) 
-            #text(font: fonts.header, weight: "bold", fill: theme.dark, context it.element.location().page())
+            #link(it.element.location())[
+              #text(font: fonts.body, size: 1.1em, it.element.body)
+              #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ])
+              #text(font: fonts.header, weight: "bold", fill: theme.dark, [#it.element.location().page()])
+            ]
           ]
         ]
         
       }
+      }
     }
-    
     #outline(title: none, indent: 0pt, depth: 2)
   ]
   // ----------------- Body --------------
@@ -269,9 +272,11 @@
                   // Recipe Entry
                   #v(0.05em)
                   #box(width: 65%)[
-                        #text(font: fonts.body, size: 0.8em, r.value.title)
-                        #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ])
-                        #text(font: fonts.header, size: 0.8em, weight: "bold", fill: theme.dark, [#r.value.page])
+                        #link(r.value.location)[
+                          #text(font: fonts.body, size: 0.8em, r.value.title)
+                          #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ])
+                          #text(font: fonts.header, size: 0.8em, weight: "bold", fill: theme.dark, [#r.value.location.position().page])
+                        ]
                       ]
                   ]
               }
@@ -299,11 +304,13 @@
                 // Recipe Entry
                 #v(0.05em)
                 #box(width: 65%)[
-                      #text(font: fonts.body, size: 0.8em, r.value.title)
-                      #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ])
-                      #text(font: fonts.header, size: 0.8em, weight: "bold", fill: theme.dark, [#r.value.page])
-                    ]
+                  #link(r.value.location)[
+                    #text(font: fonts.body, size: 0.8em, r.value.title)
+                    #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ])
+                    #text(font: fonts.header, size: 0.8em, weight: "bold", fill: theme.dark, [#r.value.location.position().page])
+                  ]
                 ]
+              ]
             }
           }
         }
@@ -385,7 +392,7 @@
   tags: ()
 ) = context {
 
-  metadata((kind: "recipe", title: name, tags: tags, page: here().position().page))
+  metadata((kind: "recipe", title: name, tags: tags, location: here()))
 
   // 1. Header Section
   let head = heading(level: 2, name)
