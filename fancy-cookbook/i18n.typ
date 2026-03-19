@@ -54,16 +54,16 @@
   index: "index"
 )
 
-
+// To merge the given dictionary with a custom one
 #let update-translation(t) = context {
   let base = translations.get()
-  let lang-key = t.keys().first()        // extrait "fr", "en", etc.
-  let previous = base.at(lang-key, default: (:))  // récupère l'entrée existante si elle existe
+  let lang-key = t.keys().first()        
+  let previous = base.at(lang-key, default: (:))  // find the language already given
 
-  // Fusionne l'ancienne entrée avec la nouvelle (les nouvelles valeurs écrasent)
+  // Merge it with the custom values
   let merged-lang = previous + t.at(lang-key)
 
-  // Reconstruit le dictionnaire complet avec la langue mise à jour
+  // Merge the full dictionary and save it
   let merged = base
   merged.insert(lang-key, merged-lang)
   translations.update(merged)

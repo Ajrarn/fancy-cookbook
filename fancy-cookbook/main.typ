@@ -53,9 +53,16 @@
   annexes: none,
   body
 ) = {
-  // Add translation if exists
+  // Add custom translation if exists
   if custom-i18n != none {
     update-translation(custom-i18n)
+  }
+
+  // if custom language we will set the txt.lang with the first one given...we only use one language
+  let lang = if custom-i18n != none {
+    custom-i18n.keys().first()
+  } else {
+    "en"
   }
 
   // set the style between "flat" or "gradient"
@@ -66,13 +73,6 @@
 
   // -------------- General Settings of the document --------------------  
   set document(title: title, author: book-author)
-  
-  // Détermine la langue avant set text
-  let lang = if custom-i18n != none {
-    custom-i18n.keys().first()
-  } else {
-    "en"
-  }
   
   set text(
     font: fonts.body,
