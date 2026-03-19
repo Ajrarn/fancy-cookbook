@@ -1,6 +1,6 @@
 #import "@preview/ez-today:2.1.0"
 #import "themes.typ": *
-#import "translations.typ": *
+#import "i18n.typ": *
 
 // export set-theme
 #let set-theme = set-theme
@@ -43,7 +43,7 @@
   date: datetime.today(),
   paper: "a4",
   cover-image: none,
-  translations: none,
+  custom-i18n: none,
   style: style.flat,
   chapter-start-right: false,
   theme: themes.grey,
@@ -54,8 +54,8 @@
   body
 ) = {
   // Add translation if exists
-  if translations != none {
-    update-translation(translations)
+  if custom-i18n != none {
+    update-translation(custom-i18n)
   }
 
   // set the style between "flat" or "gradient"
@@ -67,10 +67,18 @@
   // -------------- General Settings of the document --------------------  
   set document(title: title, author: book-author)
   
+  // Détermine la langue avant set text
+  let lang = if custom-i18n != none {
+    custom-i18n.keys().first()
+  } else {
+    "en"
+  }
+  
   set text(
-    font: fonts.body, 
+    font: fonts.body,
     size: 11pt,
-    features: (onum: 1)
+    features: (onum: 1),
+    lang: lang
   )
     
   set page(

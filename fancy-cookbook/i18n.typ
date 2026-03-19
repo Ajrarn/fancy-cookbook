@@ -54,11 +54,18 @@
   index: "index"
 )
 
-// Add translation from cookbook function
+
 #let update-translation(t) = context {
   let base = translations.get()
+  let lang-key = t.keys().first()        // extrait "fr", "en", etc.
+  let previous = base.at(lang-key, default: (:))  // récupère l'entrée existante si elle existe
+
+  // Fusionne l'ancienne entrée avec la nouvelle (les nouvelles valeurs écrasent)
+  let merged-lang = previous + t.at(lang-key)
+
+  // Reconstruit le dictionnaire complet avec la langue mise à jour
   let merged = base
-  merged += t
+  merged.insert(lang-key, merged-lang)
   translations.update(merged)
 }
 
