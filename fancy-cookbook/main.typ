@@ -207,31 +207,28 @@
     #show outline.entry: it => {
       context {
         if it.level == 1 {
-        align(center)[
-          #box(width:70%)[
-          // Section / Chapter Header
-          #v(1.5em)
-          #text(font: fonts.header, weight: "black", fill: theme.dark, size: 1.3em, upper(it.element.body))
-          #h(1fr)
-          // No page number for chapters, looks cleaner
-          ]
-        ]
-        
-        
-      } else {
-        align(center)[
-          // Recipe Entry
-          #v(0.5em)
-          #box(width: 65%)[
-            #link(it.element.location())[
-              #text(font: fonts.body, size: 1.1em, it.element.body)
-              #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ])
-              #text(font: fonts.header, weight: "bold", fill: theme.dark, [#it.element.location().page()])
+            align(center)[
+              #box(width:70%)[
+              // Section / Chapter Header
+              #v(1.5em)
+              #text(font: fonts.header, weight: "black", fill: theme.dark, size: 1.3em, upper(it.element.body))
+              #h(1fr)
+              // No page number for chapters, looks cleaner
+              ]
             ]
-          ]
-        ]
-        
-      }
+          } else {
+            align(center)[
+              // Recipe Entry
+              #v(0.5em)
+              #box(width: 65%)[
+                #link(it.element.location())[
+                  #text(font: fonts.body, size: 1.1em, it.element.body)
+                  #box(width: 1fr, repeat[ #h(0.3em) #text(fill: theme.dark, size: 0.6em)[.] #h(0.3em) ])
+                  #text(font: fonts.header, weight: "bold", fill: theme.dark, [#it.element.location().page()])
+                ]
+              ]
+            ]
+          }
       }
     }
     #outline(title: none, indent: 0pt, depth: 2)
