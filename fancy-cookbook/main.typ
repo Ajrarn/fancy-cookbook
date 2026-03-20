@@ -85,6 +85,8 @@
     paper: paper,
     margin: (x: 2cm, top: 2.5cm, bottom: 2.5cm),
     header: context {
+
+      set par(spacing: 1.2em) // to protect from changes for the content
       let p = counter(page).get().first()
       if p > 1 {
         let theme = theme-state.get()
@@ -255,20 +257,24 @@
       set-theme(theme) // The theme from cookbook
       heading(level: 1, translate(i18n.annexes))
 
+
       if all-tags.len() > 0 {
+
+        // ------- indexes pages ----------------
+
+        set par(spacing: 0.5em)
         
         if indexes != none and indexes.len() > 0 {
           // custom index pages
-          
           for index in indexes {
             heading(level: 2, index.title)
-  
+
             for tag in index.tags {
               align(center)[
                 #box(width:70%)[
                   // Tag
                   #v(0.5em)
-                  #text(font: fonts.header, weight: "black", fill: theme.dark, size: 1em, upper(tag))
+                  #text(font: fonts.header, weight: "black", fill: theme.dark, size: 0.8em, upper(tag))
                   #h(1fr)
                 ]
               ]
@@ -300,7 +306,7 @@
               #box(width:70%)[
                 // Tag
                 #v(0.5em)
-                #text(font: fonts.header, weight: "black", fill: theme.dark, size: 1em, upper(tag))
+                #text(font: fonts.header, weight: "black", fill: theme.dark, size: 0.8em, upper(tag))
                 #h(1fr)
               ]
             ]
@@ -325,8 +331,6 @@
       }
       // if custom annexes
       annexes
-      
-      
     }                        
   }
   
@@ -488,7 +492,7 @@
                 v(0.4em)
                 group.at("items")       
               })
-              v(0.4em) // espace entre les groupes
+              v(0.4em) // space between groups
             }
           }
         }          

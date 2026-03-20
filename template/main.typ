@@ -1,4 +1,4 @@
-#import "fancy-cookbook/main.typ": *
+#import "@local/fancy-cookbook:0.1.26": *
 
 // #set text(lang:"fr")
 
@@ -17,27 +17,6 @@
 )
 
 = Alcool
-#recipe(
-  [Whisky aux letchis],
-  description: [Whisky parfumé],
-  tags:("Whisky"),
-  servings: 6,
-  prep-time: [2 min],
-  cook-time: [10 min],
-  ingredients: [
-    - *1* flacon d'*1 l*
-    - *350 ml* de whisky
-    - *150 g* de sucre
-    - *1* bâton de vanille
-    - des letchis
-  ],
-  instructions: [
-    + Mettre tous les ingrédients dans le flacon.
-    + Ajouter les letchis pour le faire arriver à sa capacité.
-    + Laisser macérer.
-  ]
-)
-
 #recipe(
   [Whisky aux letchis],
   description: [Whisky parfumé],
