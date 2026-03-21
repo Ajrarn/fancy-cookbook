@@ -18,7 +18,7 @@
       preparation: "PREPARATION",
       notes: "CHEF'S NOTES",
       author: "AUTHOR",
-      annexes: "Annexes",
+      annexes: "Appendices",
       index: "Thematic Index"
     ),
     es: (

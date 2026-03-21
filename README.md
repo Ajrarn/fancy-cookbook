@@ -2,7 +2,7 @@
 
 Inspired by the excellent [Chef-cookbook by PaulMue0](https://github.com/Paulmue0/chef-cookbook/tree/main) but with a lot of differences.
 
-So this is a template to write some recipes in a coherent cookbook with beautiful colors, annexes, indexes, and other stuffs in your language.
+So this is a template to write some recipes in a coherent cookbook with beautiful colors, appendices, indexes, and other stuffs in your language.
 
 ## How to use it ?
 
@@ -117,7 +117,7 @@ And the result is :
 
 ![groups](groupsBodyRecipe.png "Groups")
 
-As you can see the numbering continue event if the lists are in different groups.
+As you can see the numbering continue even if the lists are in different groups.
 
 ### Other optional properties
 
@@ -130,7 +130,7 @@ As you can see the numbering continue event if the lists are in different groups
   image-left: image("asset/whisky.png)  // image-right or both
   ...
 ```
-You can add images to the recipe, on is for the left column and the other for the right one. This option can let you adjust your recipe to fit in one page if you want.
+You can add images to the recipe, one is for the left column and the other for the right one. This option can let you adjust your recipe to fit in one page if you want.
 
 #### *notes* and *notes-right*
 ```typ
@@ -141,8 +141,8 @@ You can add images to the recipe, on is for the left column and the other for th
   ...
 ```
 notes will be placed in a block in the left column.
-This is the default behavior and that's why it's not named notes-left.
-But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have $notes-right*
+This is the default behavior and that's why it's not named *notes-left*.
+But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have *notes-right*.
 
 #### *author*
 If you want like me to tell, recipe by recipe, who is the author like your grandmother this property is for you.
@@ -206,7 +206,7 @@ I prefer to use to dictionaries for my tags, it can help you avoid mistakes (dif
   ...
   
   
-  #recipe(
+#recipe(
   [Paella],
   description: [Very good],
   tags: (country.spain)
@@ -214,6 +214,286 @@ I prefer to use to dictionaries for my tags, it can help you avoid mistakes (dif
 ```
 
 And you will see how it can help you build custom indexes in the *cookbook* part.
+
+## Cookbook
+
+The minimal cookbook usage :
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good"
+)
+
+= Soups
+
+#recipe(
+    [Soup of the day]
+    ...
+```
+You just need a title and a subtitle to make your cookbook.
+And then you can add chapter and recipes. But you can customize your cookbook with all the next properties.
+
+### paper
+This property is used to define the size of the pages.
+You can see all the available options here [Page Function](https://typst.app/docs/reference/layout/page/) at the paper property.
+The default size is "a4" and it was not tested with all the options. This template could be awful with smaller sizes.
+
+### *subtitle*, *date* and *cover-image*
+
+All of these properties are used in the cover page with the title. Set values to see what changes.
+
+By default, *date* is set as today and you can see the month and the year at the page bottom.
+
+For the *cover-image* property, I recommend to use the built-in function *cover-image* like this:
+
+```typ
+cover-image: cover-image("assets/TonkotsuRamen.jpg"),
+```
+
+this will ensure that your image integrate with the cover with efficiency.
+
+### *back-cover-content*, *back-cover-image* and *book-author*
+
+The back-cover is optional.
+But if you set a value for *back-cover-content* or *back-cover-image* the back-cover will appear.
+As the cover is at page 1 (impair page), the back-cover will always be in a pair page, to close your book.
+
+As the name said, the *back-cover-content* property accept a content.
+
+For the *back-cover-image* property, I recommend to use the built-in function *back-cover-image* like this:
+
+```typ
+back-cover-image: back-cover-image("assets/hearts.jpg"),
+```
+
+Finally, the *book-author* is visible only the back cover page. So, if you set a value, you will see it in this page
+
+### *theme* and *style*
+
+*fancy-cookbook* loves colors and is available with 10 colored themes :
+
+* blue
+* brown
+* green
+* grey (the default one, not so fancy)
+* indigo
+* lime
+* orange
+* pink
+* purple
+* teal
+
+A theme is something like this :
+
+```typ
+#let theme-lime = (
+  dark: rgb("#4d9221"),
+  medium: rgb("#a6d96a"),
+  light: rgb("#f7fcb9")
+)
+```
+
+So when you need to set a theme you can use one of these and I will show you how, or create your own. You only need to respect the 3 keys : *dark*, *medium*, and *light*.
+
+For the *cookbook* function, the theme should be set like this :
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  theme: themes.blue
+)
+...
+```
+to use one of the themes in the package, or you can do this :
+
+```typ
+#let theme-lime = (
+  dark: rgb("#4d9221"),
+  medium: rgb("#a6d96a"),
+  light: rgb("#f7fcb9")
+)
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  theme: theme-lime
+)
+...
+```
+to use yours. In this example, I used the theme *lime* that is already in the package.
+
+Now it's time to talk about *style*.
+This property has only effect on the ingredients block. There is 2 styles available:
+* **flat**: which is the default one, medium color for the border, light color for the background color at dark color for the groups titles.
+* **gradient** : there is 2 differences.
+  * The background is now a gradient between the medium color and the light one.
+  * And to preserve contrast on the upper part, the dark color used for the titles is a little darker
+
+To set the gradient style for your book you can write :
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  style: style.gradient
+)
+...
+```
+
+
+### custom-i18n
+
+Translations is a part of this package.
+I have provided 4 languages in this version (and you can suggest others if you want on Github), but you can also provide your own version of the different labels.
+
+The 4 languages are :
+* **fr** : for french
+* **en** : for english
+* **es** for spanish
+* **por** : for portuguese
+
+To set the current language in any part of the document you can use this instruction (which I recommend you to do every time, in all your document), example with french :
+
+```typ
+#set text (lang:"fr")
+```
+
+Do it before calling the *cookbook* function. You can also switch between recipe your language with this instruction, but I don't why you would do that.
+
+#### What can you do if your language is missing ?
+You can add your language with yours by setting a dictionary with the labels to translate and use the *custom-18n* property. Here is the English version :
+
+```typ
+#let english = (
+    en: (
+      toc: "Table of Contents",
+      ingredients: "INGREDIENTS",
+      preparation: "PREPARATION",
+      notes: "CHEF'S NOTES",
+      author: "AUTHOR",
+      annexes: "Appendices",
+      index: "Thematic Index"
+    )
+)
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  custom-i18n: english
+)
+```
+And it will add your dictionary to the others. It will also set for you the *text lang* property with the first key, in this example "en".
+
+#### What if there is my language, but I want to use custom labels ?
+Because the English language already exists, the previous example will not really add english (but this is true for an unknow one), it wil replace it by this version.
+It will replace all the labels. But you can also, only change one label at a time like this :
+
+```typ
+#let english = (
+    en: (
+      toc: "Recipes"
+    )
+)
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  custom-i18n: english
+)
+```
+And only the toc label will be changed.
+
+### chapter-start-right
+The chapters appear as a separation page with a big title in the middle (it's more like a part separation).
+I like when this page is on the right side, so impair numbering page.
+
+If you like it too, just add this property set to true like this : 
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  chapter-start-right: true
+)
+```
+### custom-appendices
+The appendices section appears at the end if you set this property or if you add some tags to the recipes.
+
+This property adds what you want in the part, because it's simply a content. In my cookbook I used it to add a glossary, but you can add a bibliography or whatever you want.
+
+To set this property, I recommend to do it like that :
+
+```typ
+#let appendices = [
+    = Nice
+    Some cool stuffs
+]
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  custom-appendices: appendices
+)
+```
+And you can also prepare this in other files and just add the appendices variable here.
+
+### indexes
+As I have said fort he tags in the *recipe* function or just before in the *custom-appendices* properties, the appendices section appears with a tag in a recipe.
+And we do nothing it will have an index called in English "Thematic Index". This default index looks like the toc, but smaller.
+It will have all the keys you used as tags and the recipes that have this tags.
+
+If you only have one type of information in your tags, it's a good thing.
+But if you have different information like me (I used the location and type of recipe), you probably want 2 different indexes.
+So with this property, you'll replace the default index with yours.
+
+Here is an example with locations and types :
+
+```typ
+#let location = (
+    france: "France",
+    spain: "Spain"
+)
+
+#let type = (
+    dessert: "Dessert",
+    meal: "Meal"
+)
+
+// a function to transform a dictionary to a list
+#let dict-values(d) = d.keys().map(k => d.at(k))
+
+#let indexes = (
+  (
+    title: [Recipe by Locations],
+    tags: dict-values(location)
+  ),
+  (
+    title: [Recip by Types],
+    tags: dict-values(type)
+  )
+)
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  indexes: indexes
+)
+
+#recipe(
+  [Banana Jam],
+  description: [Sweet Jam],
+  tags: (country.france, type.dessert)
+  ...
+  
+  
+#recipe(
+  [Paella],
+  description: [Very good],
+  tags: (country.spain, type.meal)
+  ...
+```
+
+
+
+
+
 
 
 

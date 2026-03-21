@@ -50,7 +50,7 @@
   back-cover-content: none,
   back-cover-image: none,
   indexes: none,
-  annexes: none,
+  custom-appendices: none,
   body
 ) = {
   // Add custom translation if exists
