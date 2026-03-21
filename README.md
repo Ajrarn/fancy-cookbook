@@ -388,7 +388,7 @@ You can add your language with yours by setting a dictionary with the labels to 
   custom-i18n: english
 )
 ```
-And it will add your dictionary to the others. It will also set for you the *text lang* property with the first key, in this example "en".
+And it will add your dictionary to the others. But you need to set the languages with the one you have just added.
 
 #### What if there is my language, but I want to use custom labels ?
 Because the English language already exists, the previous example will not really add english (but this is true for an unknow one), it wil replace it by this version.

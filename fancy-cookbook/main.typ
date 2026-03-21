@@ -58,13 +58,6 @@
     update-translation(custom-i18n)
   }
 
-  // if custom language we will set the txt.lang with the first one given...we only use one language
-  let lang = if custom-i18n != none {
-    custom-i18n.keys().first()
-  } else {
-    "en"
-  }
-
   // set the style between "flat" or "gradient"
   set-style(style)
 
