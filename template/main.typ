@@ -1,4 +1,4 @@
-#import "@preview/fancy-cookbook:1.0.0": *
+#import "@local/fancy-cookbook:1.0.0": *
 
 #show: cookbook.with(
   title: "My Cookbook",
