@@ -327,7 +327,7 @@
         }
       }
       // if custom annexes
-      annexes
+      custom-appendices
     }                        
   }
   
