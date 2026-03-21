@@ -1,39 +1,29 @@
 #import "@local/fancy-cookbook:1.0.0": *
 
-// #set text(lang:"fr")
-
-#let french = (
-  fr: (toc: "Recettes")
-)
-
 #show: cookbook.with(
-  title: "C'est ça qu'est ban !",
-  subtitle: "Nos petites recettes préférées",
+  title: "My Cookbook",
+  subtitle: "With all good recipes",
   style: style.gradient,
   chapter-start-right: true,
   theme: themes.blue,
-  book-author: "Muriel & Christophe",
-  custom-i18n: french
+  book-author: "Me"
 )
 
-= Alcool
+= Meal
+
 #recipe(
-  [Whisky aux letchis],
-  description: [Whisky parfumé],
+  [Good food],
+  description: [with spices],
   tags:("Whisky"),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
   ingredients: [
-    - *1* flacon d'*1 l*
-    - *350 ml* de whisky
-    - *150 g* de sucre
-    - *1* bâton de vanille
-    - des letchis
+    - *1* chili pepper
+    - *2* tomatoes
   ],
   instructions: [
-    + Mettre tous les ingrédients dans le flacon.
-    + Ajouter les letchis pour le faire arriver à sa capacité.
-    + Laisser macérer.
+    + Mix all together.
+    + Eat it.
   ]
 )
