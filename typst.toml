@@ -8,7 +8,7 @@ description = "Create simple recipe collections and cookbooks in color and your 
 keywords = [ "cookbook", "recipe", "food", "kitchen", "cooking" ]
 categories = [ "layout" ]
 compiler = "0.14.2"
-exclude = [ "example.pdf", ".gitignore", "thumbnail.pdf" ]
+exclude = [ ".gitignore" ]
 disciplines = [ ]
 
 [template]
