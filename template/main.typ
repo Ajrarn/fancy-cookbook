@@ -1,4 +1,4 @@
-#import "@local/fancy-cookbook:0.1.26": *
+#import "@local/fancy-cookbook:1.0.0": *
 
 // #set text(lang:"fr")
 
