@@ -129,6 +129,7 @@ As you can see the numbering continue even if the lists are in different groups.
   description: [Perfumed Whisky],
   image-left: image("asset/whisky.png)  // image-right or both
   ...
+)
 ```
 You can add images to the recipe, one is for the left column and the other for the right one. This option can let you adjust your recipe to fit in one page if you want.
 
@@ -139,6 +140,7 @@ You can add images to the recipe, one is for the left column and the other for t
   description: [Perfumed Whisky],
   notes: [If you add some coriander at the end, il will be amazing.]
   ...
+)
 ```
 notes will be placed in a block in the left column.
 This is the default behavior and that's why it's not named *notes-left*.
@@ -153,6 +155,7 @@ If you want like me to tell, recipe by recipe, who is the author like your grand
   description: [Sweet Jam],
   author: [GrandMa]
   ...
+)
 ```
 
 #### *label*
@@ -169,6 +172,7 @@ Here si a small example of usage.
   description: [Sweet Jam],
   label: <bananaJam>
   ...
+)
   
   
 #recipe(
@@ -176,6 +180,7 @@ Here si a small example of usage.
     ingredients: [
         - @bananajam
     ...
+)
 ```
 
 
@@ -189,6 +194,7 @@ But one thing to know is that if you put only one tag in a recipe, you'll have a
   description: [Sweet Jam],
   tags: ("Banana", "Sweet", "Breakfast")
   ...
+)
 ```
 
 I prefer to use to dictionaries for my tags, it can help you avoid mistakes (different spelling). Here is an example :
@@ -204,13 +210,14 @@ I prefer to use to dictionaries for my tags, it can help you avoid mistakes (dif
   description: [Sweet Jam],
   tags: (country.spain)
   ...
-  
-  
+)
+   
 #recipe(
   [Paella],
   description: [Very good],
   tags: (country.spain)
   ...
+)
 ```
 
 And you will see how it can help you build custom indexes in the *cookbook* part.
@@ -230,6 +237,7 @@ The minimal cookbook usage :
 #recipe(
     [Soup of the day]
     ...
+)
 ```
 You just need a title and a subtitle to make your cookbook.
 And then you can add chapter and recipes. But you can customize your cookbook with all the next properties.
@@ -304,7 +312,6 @@ For the *cookbook* function, the theme should be set like this :
   subtitle: "All that good",
   theme: themes.blue
 )
-...
 ```
 to use one of the themes in the package, or you can do this :
 
@@ -320,7 +327,6 @@ to use one of the themes in the package, or you can do this :
   subtitle: "All that good",
   theme: theme-lime
 )
-...
 ```
 to use yours. In this example, I used the theme *lime* that is already in the package.
 
@@ -339,7 +345,6 @@ To set the gradient style for your book you can write :
   subtitle: "All that good",
   style: style.gradient
 )
-...
 ```
 
 
@@ -481,6 +486,7 @@ Here is an example with locations and types :
   description: [Sweet Jam],
   tags: (country.france, type.dessert)
   ...
+)
   
   
 #recipe(
@@ -488,6 +494,7 @@ Here is an example with locations and types :
   description: [Very good],
   tags: (country.spain, type.meal)
   ...
+)
 ```
 
 ## notARecipe
