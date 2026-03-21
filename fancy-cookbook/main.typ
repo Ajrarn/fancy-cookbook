@@ -70,8 +70,7 @@
   set text(
     font: fonts.body,
     size: 11pt,
-    features: (onum: 1),
-    lang: lang
+    features: (onum: 1)
   )
     
   set page(

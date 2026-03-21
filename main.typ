@@ -1,6 +1,12 @@
 #import "fancy-cookbook/main.typ": *
 
-// #set text(lang:"fr")
+#set text(lang:"fr")
+#let english = (
+    en: (
+      toc: "Recipes"
+    )
+)
+
 
 #show: cookbook.with(
   title: "My Cookbook",
@@ -9,6 +15,7 @@
   chapter-start-right: true,
   theme: themes.blue,
   book-author: "Muriel & Christophe",
+  custom-i18n: english
 )
 
 = Alcool
