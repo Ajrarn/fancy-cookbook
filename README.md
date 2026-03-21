@@ -1,6 +1,6 @@
 # Fancy Cookbook
 
-Inspired by the excellent [Chef-cookbook by PaulMue0](https://github.com/Paulmue0/chef-cookbook/tree/main) but with a lot of differences.
+Inspired by the excellent [chef-cookbook](https://typst.app/universe/package/chef-cookbook) by PaulMue0 with some significant differences.
 
 So this is a template to write some recipes in a coherent cookbook with beautiful colors, appendices, indexes, and other stuffs in your language.
 
@@ -19,7 +19,7 @@ typst init @preview/fancy-cookbook
 There is different functions to make your cookbook :
 * **recipe** : This function will help you write recipes with a very simple syntax, but it has advanced function too to customize the render.
 * **cookbook** : This function will help you for the book itself, it's the most important part. All of this needs the usage of *cookbook* and *recipe*.
-You'll use this one before everything else, but for a better comprehension, I will describe this one after the *recipe*.
+  You'll use this one before everything else, but for a better comprehension, I will describe this one after the *recipe*.
 * **notARecipe** : This one is here to help you write text in sections that not look like the recipes (there is more space here).
 * **set-theme** : This function can change the colors of the next chapters and recipes.
 * **cover-image** : This one will help you put a cover image with a good integration to the cookbook.
@@ -407,7 +407,7 @@ And only the toc label will be changed.
 The chapters appear as a separation page with a big title in the middle (it's more like a part separation).
 I like when this page is on the right side, so impair numbering page.
 
-If you like it too, just add this property set to true like this : 
+If you like it too, just add this property set to true like this :
 
 ```typ
 #show: cookbook.with(
@@ -502,6 +502,15 @@ To add more space to a section with text, for explanations for example, I have m
     A lot of things to say with *bold text* and whatever you want.
 ]
 ```
+
+## set-theme
+You can change the colors anywhere in your document by using this command :
+
+```typ
+#set-theme(themes.green)
+```
+
+or another one or your custom theme. I used it for each chapter of my book (Starter, Main, Dessert, ...) with different colors.
 
 
 
