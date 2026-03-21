@@ -490,6 +490,19 @@ Here is an example with locations and types :
   ...
 ```
 
+## notARecipe
+
+Simple to use but it's optional. I have tried to minimize as much of possible the size of a recipe.
+So certain rules are not so nice when it's not a recipe.
+
+To add more space to a section with text, for explanations for example, I have made this function. So use it like this :
+
+```typ
+#notARecipe(name: "Introduction")[
+    A lot of things to say with *bold text* and whatever you want.
+]
+```
+
 
 
 
