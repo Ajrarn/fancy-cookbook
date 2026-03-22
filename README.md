@@ -245,7 +245,7 @@ And then you can add chapter and recipes. But you can customize your cookbook wi
 ### paper
 This property is used to define the size of the pages.
 You can see all the available options here [Page Function](https://typst.app/docs/reference/layout/page/) at the paper property.
-The default size is "a4" and it was not tested with all the options. This template could be awful with smaller sizes.
+The default size is "a4" and it was not tested with all the options.
 
 ### *subtitle*, *date* and *cover-image*
 
