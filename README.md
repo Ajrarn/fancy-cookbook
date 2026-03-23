@@ -17,13 +17,13 @@ typst init @preview/fancy-cookbook
 ## What's in it ?
 
 There is different functions to make your cookbook :
-* **recipe** : This function will help you write recipes with a very simple syntax, but it has advanced function too to customize the render.
-* **cookbook** : This function will help you for the book itself, it's the most important part. All of this needs the usage of *cookbook* and *recipe*.
+* `recipe` : This function will help you write recipes with a very simple syntax, but it has advanced function too to customize the render.
+* `cookbook` : This function will help you for the book itself, it's the most important part. All of this needs the usage of *cookbook* and *recipe*.
   You'll use this one before everything else, but for a better comprehension, I will describe this one after the *recipe*.
-* **notARecipe** : This one is here to help you write text in sections that not look like the recipes (there is more space here).
-* **set-theme** : This function can change the colors of the next chapters and recipes.
-* **cover-image** : This one will help you put a cover image with a good integration to the cookbook.
-* **back-cover-image** : This one is the same as the previous but for the back cover.
+* `not-a-recipe` : This one is here to help you write text in sections that not look like the recipes (there is more space here).
+* `set-theme` : This function can change the colors of the next chapters and recipes.
+* `cover-image` : This one will help you put a cover image with a good integration to the cookbook.
+* `back-cover-image : This one is the same as the previous but for the back cover.
 
 ## Recipe
 
@@ -52,7 +52,7 @@ Minimal syntax to use it with an example :
 ```
 The first part, with the name, the description, servings, prep-time and cook-time is for the header part of the recipe that you can see here :
 
-![header](headerRecipe.png "Header")
+![Recipe's header with the title, the subtitle, the serving, the preparation time and the cooking time](headerRecipe.png "Recipe's header")
 
 You can see the page header with the book's title on left and chapter title on right and a line to separate from the header of the recipe which is also closed by a line
 
@@ -61,7 +61,7 @@ The third mandatory part is **instructions** witch is a content with a numbered 
 
 This two parts wil be separate in two columns. And all the body part of the recipe will be in the left or the right column. Here it is :
 
-![body](bodyRecipe.png "Body")
+![Recipe's body, where we can see the two columns with ingredients to the left and instructions to the right](bodyRecipe.png "Recipe's body")
 
 That's it for the simplest recipe, but we have other options. First of all we can have groups of ingredients and groups of instructions.
 
@@ -497,7 +497,7 @@ Here is an example with locations and types :
 )
 ```
 
-## notARecipe
+## not-a-recipe
 
 Simple to use but it's optional. I have tried to minimize as much of possible the size of a recipe.
 So certain rules are not so nice when it's not a recipe.
@@ -505,7 +505,7 @@ So certain rules are not so nice when it's not a recipe.
 To add more space to a section with text, for explanations for example, I have made this function. So use it like this :
 
 ```typ
-#notARecipe(name: "Introduction")[
+#not-a-recipe(name: "Introduction")[
     A lot of things to say with *bold text* and whatever you want.
 ]
 ```
