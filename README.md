@@ -115,7 +115,7 @@ For the instructions, the key *steps* will accept a content with a numbered as i
 
 And the result is :
 
-![groups](groupsBodyRecipe.png "Groups")
+![Ingredients and Instructions in grouped blocks](groupsBodyRecipe.png "Groups")
 
 As you can see the numbering continue even if the lists are in different groups.
 
