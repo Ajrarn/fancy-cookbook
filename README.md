@@ -138,7 +138,6 @@ You can add images to the recipe, one is for the left column and the other for t
   [Lychee whiskey],
   description: [Perfumed Whisky],
   notes: [If you add some coriander at the end, il will be amazing.]
-  ...
 )
 ```
 notes will be placed in a block in the left column.
