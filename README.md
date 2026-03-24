@@ -54,10 +54,10 @@ The first part, with the name, the description, servings, prep-time and cook-tim
 
 ![Recipe's header with the title, the subtitle, the serving, the preparation time and the cooking time](headerRecipe.png "Recipe's header")
 
-You can see the page header with the book's title on left and chapter title on right and a line to separate from the header of the recipe which is also closed by a line
+You can see the page header with the book's title on the left and chapter title on the right and a line to separate from the header of the recipe which is also closed by a line
 
-The second mandatory part is **ingredients** witch as you can see is a content with a list.
-The third mandatory part is **instructions** witch is a content with a numbered list.
+The second mandatory part is **ingredients** which as you can see is a content with a list.
+The third mandatory part is **instructions** which is a content with a numbered list.
 
 This two parts wil be separate in two columns. And all the body part of the recipe will be in the left or the right column. Here it is :
 
@@ -115,7 +115,7 @@ For the instructions, the key *steps* will accept a content with a numbered as i
 
 And the result is :
 
-![Ingredients and Instructions in grouped blocks](groupsBodyRecipe.png "Groups")
+![Ingredients and Instructions grouped in blocks](groupsBodyRecipe.png "Groups")
 
 As you can see the numbering continue even if the lists are in different groups.
 
@@ -128,7 +128,6 @@ As you can see the numbering continue even if the lists are in different groups.
   [Lychee whiskey],
   description: [Perfumed Whisky],
   image-left: image("asset/whisky.png)  // image-right or both
-  ...
 )
 ```
 You can add images to the recipe, one is for the left column and the other for the right one. This option can let you adjust your recipe to fit in one page if you want.
@@ -154,32 +153,30 @@ If you want like me to tell, recipe by recipe, who is the author like your grand
   [Banana Jam],
   description: [Sweet Jam],
   author: [GrandMa]
-  ...
 )
 ```
 
 #### *label*
 
-This one is very important for me. You can add a label for your recipe and use this as reference in other recipe.
+This one is very important for me. You can add a label for your recipe and use it as a reference in other recipe.
 For example, you have a recipe for Pizza Dough and different pizza recipes.
-In the ingredients part of each of them you can reference the first recipe ant the reference will be replaced by somthing like this "Pizza Douch(p 17)".
+In the ingredients part of each of them you can reference the first recipe and the reference will be replaced by something like "Pizza Dough(p. 17)".
 
-Here si a small example of usage.
+Here is a small example of usage :
 
 ```typ
 #recipe(
-  [Banana Jam],
-  description: [Sweet Jam],
-  label: <bananaJam>
-  ...
+  [Pizza Dough],
+  description: [Base Dough for Pizza],
+  label: <pizzaDough>
 )
   
   
 #recipe(
-    [Other],
+    [Peperoni Pizza],
     ingredients: [
-        - @bananajam
-    ...
+      - @pizzaDough
+    ]
 )
 ```
 
@@ -193,11 +190,10 @@ But one thing to know is that if you put only one tag in a recipe, you'll have a
   [Banana Jam],
   description: [Sweet Jam],
   tags: ("Banana", "Sweet", "Breakfast")
-  ...
 )
 ```
 
-I prefer to use to dictionaries for my tags, it can help you avoid mistakes (different spelling). Here is an example :
+I prefer to use dictionaries for my tags, it can help you avoid mistakes (different spelling). Here is an example :
 
 ```typ
 #let country = (
@@ -209,14 +205,12 @@ I prefer to use to dictionaries for my tags, it can help you avoid mistakes (dif
   [Banana Jam],
   description: [Sweet Jam],
   tags: (country.spain)
-  ...
 )
    
 #recipe(
   [Paella],
   description: [Very good],
   tags: (country.spain)
-  ...
 )
 ```
 
@@ -236,7 +230,6 @@ The minimal cookbook usage :
 
 #recipe(
     [Soup of the day]
-    ...
 )
 ```
 You just need a title and a subtitle to make your cookbook.
@@ -275,7 +268,7 @@ For the *back-cover-image* property, I recommend to use the built-in function *b
 back-cover-image: back-cover-image("assets/hearts.jpg"),
 ```
 
-Finally, the *book-author* is visible only the back cover page. So, if you set a value, you will see it in this page
+Finally, the *book-author* is visible only in the back cover page. So, if you set a value, you will see it in this page.
 
 ### *theme* and *style*
 
@@ -313,7 +306,9 @@ For the *cookbook* function, the theme should be set like this :
   theme: themes.blue
 )
 ```
-to use one of the themes in the package, or you can do this :
+to use one of the themes in the package.
+
+Or you can do this :
 
 ```typ
 #let theme-lime = (
@@ -331,11 +326,11 @@ to use one of the themes in the package, or you can do this :
 to use yours. In this example, I used the theme *lime* that is already in the package.
 
 Now it's time to talk about *style*.
-This property has only effect on the ingredients block. There is 2 styles available:
-* **flat**: which is the default one, medium color for the border, light color for the background color at dark color for the groups titles.
+This property has only effect on the ingredients block. There is 2 styles available :
+* **flat**: which is the default one, medium color for the border, light color for the background and dark color for the groups titles.
 * **gradient** : there is 2 differences.
   * The background is now a gradient between the medium color and the light one.
-  * And to preserve contrast on the upper part, the dark color used for the titles is a little darker
+  * And to preserve contrast on the upper part, the dark color used for the groups titles is a little darker.
 
 To set the gradient style for your book you can write :
 
@@ -365,10 +360,10 @@ To set the current language in any part of the document you can use this instruc
 #set text (lang:"fr")
 ```
 
-Do it before calling the *cookbook* function. You can also switch between recipe your language with this instruction, but I don't why you would do that.
+Do it before calling the *cookbook* function. You can also switch between recipe your language with this instruction, but I don't know why you would do that.
 
 #### What can you do if your language is missing ?
-You can add your language with yours by setting a dictionary with the labels to translate and use the *custom-18n* property. Here is the English version :
+You can add your own language by setting a dictionary with the labels to translate and use the *custom-18n* property. Here is the English version :
 
 ```typ
 #let english = (
@@ -388,11 +383,11 @@ You can add your language with yours by setting a dictionary with the labels to 
   custom-i18n: english
 )
 ```
-And it will add your dictionary to the others. But you need to set the languages with the one you have just added.
+And it will add your dictionary to the others. But you need to set the languages (`#set text (lang:"fr")`) with the one you have just added.
 
 #### What if there is my language, but I want to use custom labels ?
-Because the English language already exists, the previous example will not really add english (but this is true for an unknow one), it wil replace it by this version.
-It will replace all the labels. But you can also, only change one label at a time like this :
+Because the English language already exists, the previous example will not really add English (but this is true for an unknown one), your version will replace mine.
+But you can also, only change one label at a time like this :
 
 ```typ
 #let english = (
@@ -438,15 +433,14 @@ To set this property, I recommend to do it like that :
   custom-appendices: appendices
 )
 ```
-And you can also prepare this in other files and just add the appendices variable here.
 
 ### indexes
-As I have said fort he tags in the *recipe* function or just before in the *custom-appendices* properties, the appendices section appears with a tag in a recipe.
-And we do nothing it will have an index called in English "Thematic Index". This default index looks like the toc, but smaller.
+As I have said for the tags in the *recipe* function or just before in the *custom-appendices* properties, the appendices section appears with a tag in a recipe.
+And if we do nothing it will have an index called in English "Thematic Index". This default index looks like the toc, but smaller.
 It will have all the keys you used as tags and the recipes that have this tags.
 
 If you only have one type of information in your tags, it's a good thing.
-But if you have different information like me (I used the location and type of recipe), you probably want 2 different indexes.
+But if you have different information like me (I used the location and type of recipe), you'll probably want 2 different indexes.
 So with this property, you'll replace the default index with yours.
 
 Here is an example with locations and types :
@@ -485,7 +479,6 @@ Here is an example with locations and types :
   [Banana Jam],
   description: [Sweet Jam],
   tags: (country.france, type.dessert)
-  ...
 )
   
   
@@ -493,13 +486,12 @@ Here is an example with locations and types :
   [Paella],
   description: [Very good],
   tags: (country.spain, type.meal)
-  ...
 )
 ```
 
 ## not-a-recipe
 
-Simple to use but it's optional. I have tried to minimize as much of possible the size of a recipe.
+Simple to use but it's optional. I have tried to minimize as much as possible the size of a recipe.
 So certain rules are not so nice when it's not a recipe.
 
 To add more space to a section with text, for explanations for example, I have made this function. So use it like this :
