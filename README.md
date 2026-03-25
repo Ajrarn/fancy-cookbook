@@ -21,7 +21,7 @@ There is different functions to make your cookbook :
 * `cookbook` : This function will help you for the book itself, it's the most important part. All of this needs the usage of *cookbook* and *recipe*.
   You'll use this one before everything else, but for a better comprehension, I will describe this one after the *recipe*.
 * `not-a-recipe` : This one is here to help you write text in sections that not look like the recipes (there is more space here).
-* `set-theme` : This function can change the colors of the next chapters and recipes.
+* `chapter` : This function can create a new chapter with a change of theme.
 * `cover-image` : This one will help you put a cover image with a good integration to the cookbook.
 * `back-cover-image : This one is the same as the previous but for the back cover.
 
@@ -324,6 +324,22 @@ Or you can do this :
 ```
 to use yours. In this example, I used the theme *lime* that is already in the package.
 
+If you want your cookbook to be multicolor, ou must set the property _multicolor_ to *true* like this :
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  multicolor: true
+)
+```
+
+And when it's done don't use the standard syntax for a new chapter `= Main` instead you must use the function `chapter` like this :
+
+```typ
+#chapter(theme: themes.lime)[Main]
+```
+
 Now it's time to talk about *style*.
 This property has only effect on the ingredients block. There is 2 styles available :
 * **flat**: which is the default one, medium color for the border, light color for the background and dark color for the groups titles.
@@ -501,11 +517,11 @@ To add more space to a section with text, for explanations for example, I have m
 ]
 ```
 
-## set-theme
-You can change the colors anywhere in your document by using this command :
+## chapter
+I you choose for the document the option for multicolor, you can change the colors of a chapter in your document by using this command :
 
 ```typ
-#set-theme(themes.green)
+#chapter(theme: themes.green)[Main]
 ```
 
 or another one or your custom theme. I used it for each chapter of my book (Starter, Main, Dessert, ...) with different colors.
