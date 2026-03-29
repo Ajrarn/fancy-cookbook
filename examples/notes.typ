@@ -11,6 +11,7 @@
 #recipe(
   [Simple Recipe],
   description: [Not really a recipe],
+  notes: [Something to say about it.],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -28,6 +29,7 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
+  notes-right: [Something to say about it.],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],

@@ -1,12 +1,17 @@
 #import "@local/fancy-cookbook:1.0.8": *
 
+#let appendices = not-a-recipe(name:"My appendice")[
+  - *Something* : that I can explain.
+  - *And Something* : that I can't.
+]
+
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "little subtitle",
-  book-author: "Myself"
+  book-author: "Myself",
+  custom-appendices: appendices
 )
 
-#chapter(palette: palette.coral)[Here it is]
 
 #recipe(
   [Simple Recipe],

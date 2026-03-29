@@ -1,12 +1,23 @@
-#import "colors/palettes.typ": style
-#import "colors/colors.typ": page-palette, fill-ingredients, ingredient-group-color
-#import "fonts.typ": fonts
-#import "icons.typ": make-icons
-#import "i18n/i18n.typ": translate
-#import "i18n/translations.typ": i18n
-#import "states.typ": style-state
+#import "../colors/palettes.typ": style, palette-grey
+#import "../colors/colors.typ": page-palette, fill-ingredients, ingredient-group-color, style-state
+#import "../assets/fonts.typ": fonts
+#import "../assets/icons.typ": make-icons
+#import "../i18n/i18n.typ": translate
+#import "../i18n/translations.typ": i18n-words
 
-// =============== Recipe =====================
+
+#let format-authors(authors) = {
+  if authors.len() == 1 {
+    authors.at(0)
+  } else if authors.len() == 2 {
+    authors.at(0) + " " + translate(i1i18n-words8n.author_and) + " " + authors.at(1)
+  } else {
+    let all_but_last = authors.slice(0, authors.len() - 1).join(", ")
+    let last = authors.at(authors.len() - 1)
+    all_but_last + ", " + translate(i18n-words.author_and) + " " + last
+  }
+}
+
 #let recipe(
   name,
   ingredients: [],
@@ -19,12 +30,17 @@
   cook-time: none,
   notes: none,
   notes-right: none,
-  author: none,
+  authors: none,
   label: none,
-  tags: ()
+  tags: (),
+  change-palette: none
 ) = context {
 
-  metadata((kind: "recipe", title: name, tags: tags, location: here()))
+  if change-palette != none {
+    set-palette(change-palette)
+  }
+
+  metadata((kind: "recipe", title: name, tags: tags, location: here(), page: here().position().page))
 
   // 1. Header Section
   let head = heading(level: 2, name)
@@ -35,7 +51,7 @@
   }
   
   // Where we get the color palette
-  let palette = page-palette(here().page())
+  let current-palette = page-palette(here().page())
 
   // Description & Meta row
   grid(
@@ -46,12 +62,12 @@
       }
     }),
     align(right + horizon, {
-      let paletted-icons = make-icons(palette.dark)
+      let colored-icons = make-icons(current-palette.dark)
       set text(font: fonts.header, size: 0.9em, fill: black)
       let meta = ()
-      if servings != none { meta.push([#paletted-icons.yield #h(0.3em) #servings]) }
-      if prep-time != none { meta.push([#paletted-icons.time #h(0.3em) #prep-time]) }
-      if cook-time != none { meta.push([#paletted-icons.fire #h(0.3em) #cook-time]) }
+      if servings != none { meta.push([#colored-icons.yield #h(0.3em) #servings]) }
+      if prep-time != none { meta.push([#colored-icons.time #h(0.3em) #prep-time]) }
+      if cook-time != none { meta.push([#colored-icons.fire #h(0.3em) #cook-time]) }
       if meta.len() > 0 {
         meta.join(h(1.5em))
       }
@@ -59,7 +75,7 @@
   )
   
   v(0.1em)
-  line(length: 100%, stroke: 0.5pt + palette.medium)
+  line(length: 100%, stroke: 0.5pt + current-palette.medium)
   v(1em)
 
   // 2. Main Layout (Sidebar + Content)
@@ -76,18 +92,18 @@
       let style = style-state.get()
 
       block(
-        fill: fill-ingredients(style, palette),
+        fill: fill-ingredients(style, current-palette),
         inset: 1.2em,
         radius: 4pt,
         width: 100%,
-        stroke: 0.5pt + palette.medium,
+        stroke: 0.5pt + current-palette.medium,
       )[
-        #text(font: fonts.header, weight: "bold", size: 1.1em, translate(i18n.ingredients))
+        #text(font: fonts.header, weight: "bold", size: 1.1em, translate(i18n-words.ingredients))
         
         #set list(
           marker: box(
             height: 0.8em, width: 0.8em,
-            stroke: 1pt + palette.dark,
+            stroke: 1pt + current-palette.dark,
             radius: 2pt,
             baseline: 20%,
           ),
@@ -108,7 +124,7 @@
             for group in ingredients {
               block(breakable: false, {
                 // Titre du groupe
-                text(font: fonts.header, weight: "bold", size: 1.1em, fill: ingredient-group-color(style, palette), group.at("title", default: ""))
+                text(font: fonts.header, weight: "bold", size: 1.1em, fill: ingredient-group-color(style, current-palette), group.at("title", default: ""))
                 v(0.4em)
                 group.at("items")       
               })
@@ -117,21 +133,43 @@
           }
         }          
       ]
-      // ---- Author
-      if author != none {
+      // ---- Authors
+      if authors != none {
         v(0.5em)
         block(breakable: false, {
-          text(font: fonts.header, size: 0.9em, weight: "bold", fill: palette.dark, translate(i18n.author))
+      
+          let is-multiple = type(authors) == array and authors.len() > 1
+      
+          let label = if is-multiple {
+            translate(i18n-words.authors)
+          } else {
+            translate(i18n-words.author)
+          }
+      
+          text(
+            font: fonts.header,
+            size: 0.9em,
+            weight: "bold",
+            fill: current-palette.dark,
+            label
+          )
+      
           v(0.1em)
-          text(weight: "bold", size: 0.9em, author)
+      
+          if type(authors) == array {
+            text(weight: "bold", size: 0.9em, authors.join(", "))
+          } else {
+            text(weight: "bold", size: 0.9em, authors)
+          }
         })
       }
+      
 
       // ---- notes
       if notes != none {
         v(0.5em)
         block(breakable: false, {
-          text(font: fonts.header, size: 0.9em, weight: "bold", fill: palette.dark, translate(i18n.notes))
+          text(font: fonts.header, size: 0.9em, weight: "bold", fill: current-palette.dark, translate(i18n-words.notes))
           v(0.1em)
           text(style: "italic", size: 0.9em, fill: palette-grey.dark, notes)
         })
@@ -147,7 +185,7 @@
         })
       }
       
-      text(font: fonts.header, weight: "bold", size: 1.1em, translate(i18n.preparation))
+      text(font: fonts.header, weight: "bold", size: 1.1em, translate(i18n-words.preparation))
       v(1em)
       
       counter("recipe-step").update(0)
@@ -155,7 +193,7 @@
       set enum(
         numbering: n => {
           counter("recipe-step").step()
-          text(font: fonts.header, size: 1.2em, weight: "bold", fill: palette.dark,
+          text(font: fonts.header, size: 1.2em, weight: "bold", fill: current-palette.dark,
             box(inset: (right: 0.5em), context counter("recipe-step").display()))
         }
       )
@@ -177,7 +215,7 @@
         for section in instructions {
           block(breakable: false, {
             // section title
-            text(font: fonts.header, weight: "bold", size: 1.2em, fill: palette.dark,
+            text(font: fonts.header, weight: "bold", size: 1.2em, fill: current-palette.dark,
               section.at("title", default: ""))
             v(0.5em)
             section.at("steps", default: [])
@@ -192,7 +230,7 @@
       if notes-right != none {
         v(0.5em)
         block(breakable: false, {
-          text(font: fonts.header, size: 0.9em, weight: "bold", fill: palette.dark, translate(i18n.notes))
+          text(font: fonts.header, size: 0.9em, weight: "bold", fill: current-palette.dark, translate(i18n-words.notes))
           v(0.1em)
           text(style: "italic", size: 0.9em, fill: palette-grey.dark, notes-right)
         })

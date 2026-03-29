@@ -17,13 +17,15 @@ typst init @preview/fancy-cookbook
 ## What's in it ?
 
 There is different functions to make your cookbook :
-* `recipe` : This function will help you write recipes with a very simple syntax, but it has advanced function too to customize the render.
+* `recipe` : This function will help you write recipes with a very simple syntax, but it has advanced functions too to customize the render.
 * `cookbook` : This function will help you for the book itself, it's the most important part. All of this needs the usage of *cookbook* and *recipe*.
   You'll use this one before everything else, but for a better comprehension, I will describe this one after the *recipe*.
 * `not-a-recipe` : This one is here to help you write text in sections that not look like the recipes (there is more space here).
-* `chapter` : This function can create a new chapter with a change of theme.
+* `chapter` : This function can create a new chapter with a change of palette.
 * `cover-image` : This one will help you put a cover image with a good integration to the cookbook.
 * `back-cover-image : This one is the same as the previous but for the back cover.
+* `next-palette`: if you want to use the markup for chapters, it will help you change color between chapters.
+* `set-all-palettes`: this function help you to manually set all the pages where the palette changes.
 
 ## Recipe
 
@@ -144,16 +146,27 @@ notes will be placed in a block in the left column.
 This is the default behavior and that's why it's not named *notes-left*.
 But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have *notes-right*.
 
-#### *author*
-If you want like me to tell, recipe by recipe, who is the author like your grandmother this property is for you.
+#### *authors*
+If you want like me to tell, recipe by recipe, who are the authors like your grandmother this property is for you.
+But there is two syntaxes, one when you only have one author :
 
 ```typ
 #recipe(
   [Banana Jam],
   description: [Sweet Jam],
-  author: [GrandMa]
+  authors: [GrandMa]
 )
 ```
+and if you have mulitple authors :
+
+```typ
+#recipe(
+  [Banana Jam],
+  description: [Sweet Jam],
+  authors: ([GrandMa],[GrandPa])
+)
+```
+The label used will reflect this and if you have multiples, they will appear with ',' between them.
 
 #### *label*
 
@@ -215,6 +228,9 @@ I prefer to use dictionaries for my tags, it can help you avoid mistakes (differ
 
 And you will see how it can help you build custom indexes in the *cookbook* part.
 
+#### change-palette
+If you want to change the palette when you describe a recip, this property will do this for you.
+
 ## Cookbook
 
 The minimal cookbook usage :
@@ -269,48 +285,56 @@ back-cover-image: back-cover-image("assets/hearts.jpg"),
 
 Finally, the *book-author* is visible only in the back cover page. So, if you set a value, you will see it in this page.
 
-### *theme* and *style*
+### *colors* and *style*
 
-*fancy-cookbook* loves colors and is available with 10 colored themes :
+*fancy-cookbook* loves colors and is available with 10 colored palettes :
 
+* amber
 * blue
 * brown
+* coral
+* forest
 * green
-* grey (the default one, not so fancy)
+* grey
 * indigo
+* lagoon
 * lime
 * orange
 * pink
 * purple
+* rose
+* slate (the default one)
+* sunset
 * teal
 
-A theme is something like this :
+
+A palette is something like this :
 
 ```typ
-#let theme-lime = (
+#let palette-lime = (
   dark: rgb("#4d9221"),
   medium: rgb("#a6d96a"),
   light: rgb("#f7fcb9")
 )
 ```
 
-So when you need to set a theme you can use one of these and I will show you how, or create your own. You only need to respect the 3 keys : *dark*, *medium*, and *light*.
+So when you need to set a palette you can use one of these and I will show you how, or create your own. You only need to respect the 3 keys : *dark*, *medium*, and *light*.
 
-For the *cookbook* function, the theme should be set like this :
+For the *cookbook* function, the palette should be set like this :
 
 ```typ
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "All that good",
-  theme: themes.blue
+  palette: palette.blue
 )
 ```
-to use one of the themes in the package.
+to use one of the palettes in the package.
 
 Or you can do this :
 
 ```typ
-#let theme-lime = (
+#let palette-lime = (
   dark: rgb("#4d9221"),
   medium: rgb("#a6d96a"),
   light: rgb("#f7fcb9")
@@ -319,26 +343,12 @@ Or you can do this :
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "All that good",
-  theme: theme-lime
+  palette: palette-lime
 )
 ```
-to use yours. In this example, I used the theme *lime* that is already in the package.
+to use yours. In this example, I used the palette *lime* that is already in the package.
 
-If you want your cookbook to be multicolor, ou must set the property _multicolor_ to *true* like this :
-
-```typ
-#show: cookbook.with(
-  title: "My Cookbook",
-  subtitle: "All that good",
-  multicolor: true
-)
-```
-
-And when it's done don't use the standard syntax for a new chapter `= Main` instead you must use the function `chapter` like this :
-
-```typ
-#chapter(theme: themes.lime)[Main]
-```
+If you want to change colors between chapters, like me, I recommand to use the `chapter` function tha will be explain later.
 
 Now it's time to talk about *style*.
 This property has only effect on the ingredients block. There is 2 styles available :
@@ -449,7 +459,7 @@ To set this property, I recommend to do it like that :
 )
 ```
 
-### indexes
+### custom-indexes
 As I have said for the tags in the *recipe* function or just before in the *custom-appendices* properties, the appendices section appears with a tag in a recipe.
 And if we do nothing it will have an index called in English "Thematic Index". This default index looks like the toc, but smaller.
 It will have all the keys you used as tags and the recipes that have this tags.
@@ -487,7 +497,7 @@ Here is an example with locations and types :
 
 #show: cookbook.with(
   title: "My Cookbook",
-  indexes: indexes
+  custom-indexes: indexes
 )
 
 #recipe(
@@ -503,6 +513,38 @@ Here is an example with locations and types :
   tags: (country.spain, type.meal)
 )
 ```
+
+### *custom-cover* and *custom-backcover*
+These properties let you design your own cover and back-cover and give it to the cookbook function :
+
+```typ
+#let cover = [
+    = Nice Cover
+    Some cool stuffs
+]
+
+#let back-cover = [
+    = Nice Back Cover
+    Some cool stuffs
+]
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  custom-cover: cover,
+  custom-back-cover: back-cover
+)
+```
+
+### only-recipes
+This property will set off the cover, the toc, the back-cover and the appendices if you set it to true :
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  only-recipes: true
+)
+```
+
 
 ## not-a-recipe
 
@@ -521,10 +563,42 @@ To add more space to a section with text, for explanations for example, I have m
 I you choose for the document the option for multicolor, you can change the colors of a chapter in your document by using this command :
 
 ```typ
-#chapter(theme: themes.green)[Main]
+#chapter(palette: palette.green)[Main]
 ```
 
-or another one or your custom theme. I used it for each chapter of my book (Starter, Main, Dessert, ...) with different colors.
+or another one or your custom palette. I used it for each chapter of my book (Starter, Main, Dessert, ...) with different colors.
+
+## next-palette
+If you want to use the markup for chapters, it will help you change color between chapters. You'll use it like this :
+
+```typ
+#next-palette(palette: palette.green)
+= Main
+```
+Because it's not easy to know when the next heading will appear you can adjust the offset of the next palette like this :
+
+```typ
+#next-palette(palette: palette.green, offset: 1)
+= Main
+```
+
+
+## set-all-palettes
+this function help you to manually set all the pages where the palette changes.
+When all your document is donne you can choose manually every time you want to change colors like this :
+
+```typ
+#let pages-palettes = (
+  (palette: palette.blue, page: 3),
+  (palette: palette.green, page: 5),
+  (palette: palette.rose, page: 8),
+  (palette: palette.sunset, page: 10),
+)
+#set-all-palettes(palette: palette.green, offset: 1)
+= Main
+```
+
+
 
 
 

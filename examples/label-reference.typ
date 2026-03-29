@@ -10,6 +10,7 @@
 
 #recipe(
   [Simple Recipe],
+  label: <simple>,
   description: [Not really a recipe],
   servings: 6,
   prep-time: [2 min],
@@ -37,6 +38,7 @@
       items: [
         - *1 l* of water
         - *350 ml* of fruit juice
+        - *1* @simple
       ]
     ),
     (

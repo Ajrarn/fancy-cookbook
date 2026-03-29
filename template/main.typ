@@ -1,29 +1,80 @@
-#import "@local/fancy-cookbook:1.0.1": *
+#import "@local/fancy-cookbook:1.0.8": *
 
 #show: cookbook.with(
   title: "My Cookbook",
-  subtitle: "With all good recipes",
-  style: style.gradient,
-  chapter-start-right: true,
-  theme: themes.blue,
-  book-author: "Me"
+  subtitle: "little subtitle",
+  book-author: "Myself"
 )
 
-= Meal
+#chapter(palette: palette.coral)[Here it is]
 
 #recipe(
-  [Good food],
-  description: [with spices],
-  tags:("Whisky"),
+  [Simple Recipe],
+  description: [Not really a recipe],
+  authors: [Myself],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
-  ingredients: [
-    - *1* chili pepper
-    - *2* tomatoes
+  ingredients:[
+    - *1 l* of water
+    - *350 ml* of fruit juice
   ],
   instructions: [
-    + Mix all together.
-    + Eat it.
+    + put all together
+    + shake well
+    + reserve in fridge
   ]
 )
+
+#recipe(
+  [Recipe With Groups],
+  description: [Not really a recipe],
+  authors: [Myself],
+  servings: 6,
+  prep-time: [2 min],
+  cook-time: [10 min],
+  ingredients:(
+    (
+      title: [Liquid],
+      items: [
+        - *1 l* of water
+        - *350 ml* of fruit juice
+      ]
+    ),
+    (
+      title: [Solid],
+      items: [
+        - *300 mg* of wheat flour
+        - *12 g* of butter
+        - *150 g* of sugar
+      ]
+    )
+  ),
+  instructions: (
+    (
+      title: [Liquid],
+      steps: [
+        + put all together
+        + shake well
+        + reserve in fridge
+      ]
+    ),
+    (
+      title: [Solid],
+      steps: [
+        + Put all together
+        + Mix well
+        + Put everything in the garbage
+        + Call for a pizza
+      ]
+    )
+  )
+)  
+
+
+
+
+
+
+
+

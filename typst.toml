@@ -1,7 +1,7 @@
 [package]
 name = "fancy-cookbook"
-version = "1.0.1"
-entrypoint = "fancy-cookbook/main.typ"
+version = "1.0.8"
+entrypoint = "lib/main.typ"
 authors = [ "Christophe Dos Santos" ]
 license = "MIT"
 description = "Create simple recipe collections and cookbooks in color and your language."
