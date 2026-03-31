@@ -11,7 +11,7 @@
 #recipe(
   [Simple Recipe],
   description: [Not really a recipe],
-  authors: [Myself],
+  notes: [Something to say about it.],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -29,7 +29,7 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  authors: [Myself],
+  notes-right: [Something to say about it.],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -64,7 +64,7 @@
       steps: [
         + Put all together
         + Mix well
-        + Put everything in the garbage
+        + Put it all in the garbage
         + Call for a pizza
       ]
     )

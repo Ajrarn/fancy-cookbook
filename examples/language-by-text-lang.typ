@@ -1,17 +1,18 @@
 #import "@local/fancy-cookbook:2.0.0": *
 
+#set text(lang:"pt")
+
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "little subtitle",
   book-author: "Myself"
 )
 
-#chapter(change-palette: palette.coral)[Here it is]
+#chapter[Here it is]
 
 #recipe(
   [Simple Recipe],
   description: [Not really a recipe],
-  authors: [Myself],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -29,7 +30,6 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  authors: [Myself],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -64,7 +64,7 @@
       steps: [
         + Put all together
         + Mix well
-        + Put everything in the garbage
+        + Put it all in the garbage
         + Call for a pizza
       ]
     )

@@ -1,82 +1,82 @@
-#import "fancy-cookbook/main.typ": *
-
-#set text(lang:"fr")
-#let english = (
-    en: (
-      toc: "Recipes"
-    )
-)
-
+#import "@local/fancy-cookbook:2.0.0": *
 
 #show: cookbook.with(
   title: "My Cookbook",
-  subtitle: "Nos petites recettes préférées",
-  style: style.gradient,
-  chapter-start-right: true,
-  theme: themes.blue,
-  book-author: "Muriel & Christophe",
-  custom-i18n: english
+  subtitle: "little subtitle",
+  book-author: "Myself",
+  lang: "es"
 )
 
-= Alcool
+#chapter[Here it is]
 
 #recipe(
-  [Lychee whiskey],
-  description: [Perfumed Whisky],
-  tags:("Whisky"),
+  [Simple Recipe],
+  description: [Not really a recipe],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
-  ingredients: [
-    - *1 l* flask empty and clean
-    - *350 ml* of whisky
-    - *150 g* of sugar
-    - *1* vanilla stick
-    - Some lychees
+  ingredients:[
+    - *1 l* of water
+    - *350 ml* of fruit juice
   ],
   instructions: [
-    + Put the whisky, the sugar and the vanilla stick in the flask.
-    + Add lychees in it the flask until the flask is full.
-    + Leave to macerate.
+    + put all together
+    + shake well
+    + reserve in fridge
   ]
 )
 
-#recipe([Something Cool],
-  description: [An imaginary recipe],
+#recipe(
+  [Recipe With Groups],
+  description: [Not really a recipe],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
-  ingredients: (
+  ingredients:(
     (
-      title: [Dough],
+      title: [Liquid],
       items: [
-        - Some flour
-        - Eggs
+        - *1 l* of water
+        - *350 ml* of fruit juice
       ]
     ),
     (
-      title: [Trim],
+      title: [Solid],
       items: [
-        - Mandragora roots
-        - Chili powder
-        - Sugar
+        - *300 mg* of wheat flour
+        - *12 g* of butter
+        - *150 g* of sugar
       ]
     )
   ),
   instructions: (
     (
-      title: [Dough],
+      title: [Liquid],
       steps: [
-        + Put all together and mix
-        + Cast a hot spell to make it burns
+        + put all together
+        + shake well
+        + reserve in fridge
       ]
     ),
     (
-      title: [Garnish],
+      title: [Solid],
       steps: [
-        + Mix all together
-        + And put all of these in the garbage
+        + Put all together
+        + Mix well
+        + Put it all in the garbage
+        + Call for a pizza
       ]
     )
   )
 )
+
+#show-metadata(page-palette-meta-name)
+#show-metadata(recipe-meta-name)
+
+
+
+
+
+
+
+

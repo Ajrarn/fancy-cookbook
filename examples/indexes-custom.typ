@@ -1,9 +1,33 @@
 #import "@local/fancy-cookbook:2.0.0": *
 
+#let dict-values(d) = d.keys().map(k => d.at(k))
+
+#let dict-one = (
+  good: "Good",
+  awful: "Awful"
+)
+
+#let dict-two = (
+  cold: "Cold",
+  hot: "Hot"
+)
+
+#let indexes = (
+  (
+    title: [Dict One],
+    tags: dict-values(dict-one)
+  ),
+  (
+    title: [Dict Two],
+    tags: dict-values(dict-two)
+  )
+)
+
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "little subtitle",
-  book-author: "Myself"
+  book-author: "Myself",
+  custom-indexes: indexes
 )
 
 #chapter(change-palette: palette.coral)[Here it is]
@@ -11,7 +35,7 @@
 #recipe(
   [Simple Recipe],
   description: [Not really a recipe],
-  authors: [Myself],
+  tags: (dict-one.good, dict-two.cold),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -29,7 +53,7 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  authors: [Myself],
+  tags: (dict-one.awful, dict-two.hot),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -64,7 +88,7 @@
       steps: [
         + Put all together
         + Mix well
-        + Put everything in the garbage
+        + Put it all in the garbage
         + Call for a pizza
       ]
     )

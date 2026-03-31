@@ -17,17 +17,18 @@ typst init @preview/fancy-cookbook
 ## What's in it ?
 
 There is different functions to make your cookbook :
-* `recipe` : This function will help you write recipes with a very simple syntax, but it has advanced function too to customize the render.
-* `cookbook` : This function will help you for the book itself, it's the most important part. All of this needs the usage of *cookbook* and *recipe*.
+* `recipe`: This function will help you write recipes with a very simple syntax, but it has advanced functions too to customize the render.
+* `cookbook`: This function will help you for the book itself, it's the most important part. All of this needs the usage of *cookbook* and *recipe*.
   You'll use this one before everything else, but for a better comprehension, I will describe this one after the *recipe*.
-* `not-a-recipe` : This one is here to help you write text in sections that not look like the recipes (there is more space here).
-* `set-theme` : This function can change the colors of the next chapters and recipes.
-* `cover-image` : This one will help you put a cover image with a good integration to the cookbook.
-* `back-cover-image : This one is the same as the previous but for the back cover.
+* `not-a-recipe`: This one is here to help you write text in sections that not look like the recipes (there is more space here).
+* `chapter`: This function can create a new chapter with a change of palette.
+* `cover-image`: This one will help you put a cover image with a good integration to the cookbook.
+* `back-cover-image`: This one is the same as the previous but for the back cover.
+* `set-all-palettes`: this function help you to manually set all the pages where the palette changes.
 
 ## Recipe
 
-Minimal syntax to use it with an example :
+Minimal syntax to use it with an example:
 
 ```typ
 #recipe(
@@ -46,7 +47,7 @@ Minimal syntax to use it with an example :
   instructions: [
     + Put the whisky, the sugar and the vanilla stick in the flask.
     + Add lychees in it the flask until the flask is full.
-    + Leave to macerate.
+    + Let it macerate.
   ]
 )
 ```
@@ -59,7 +60,7 @@ You can see the page header with the book's title on the left and chapter title 
 The second mandatory part is **ingredients** which as you can see is a content with a list.
 The third mandatory part is **instructions** which is a content with a numbered list.
 
-This two parts wil be separate in two columns. And all the body part of the recipe will be in the left or the right column. Here it is :
+This two parts will be dispatch in two columns. And all the body part of the recipe will be in the left or the right column. Here it is:
 
 ![Recipe's body, where we can see the two columns with ingredients to the left and instructions to the right](bodyRecipe.png "Recipe's body")
 
@@ -111,7 +112,7 @@ That's it for the simplest recipe, but we have other options. First of all we ca
 
 So you can see that we have replaced the content with lists of dictionaries. The two known dictionaries have a key named *title*.
 For the ingredients, the key *items* will accept a content with a list, as it was before.
-For the instructions, the key *steps* will accept a content with a numbered as it was before.
+For the instructions, the key *steps* will accept a content with a numbered list as it was before.
 
 And the result is :
 
@@ -137,29 +138,42 @@ You can add images to the recipe, one is for the left column and the other for t
 #recipe(
   [Lychee whiskey],
   description: [Perfumed Whisky],
-  notes: [If you add some coriander at the end, il will be amazing.]
+  notes: [If you add some coriander at the end, it will be amazing.]
 )
 ```
 notes will be placed in a block in the left column.
 This is the default behavior and that's why it's not named *notes-left*.
 But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have *notes-right*.
 
-#### *author*
-If you want like me to tell, recipe by recipe, who is the author like your grandmother this property is for you.
+#### *authors*
+
+
+If you want like me to credit authors for each recipe individually — your grandmother, for instance, this property is for you.
+But there is two syntaxes, one when you only have one author :
 
 ```typ
 #recipe(
   [Banana Jam],
   description: [Sweet Jam],
-  author: [GrandMa]
+  authors: [GrandMa]
 )
 ```
+and if you have multiple authors :
+
+```typ
+#recipe(
+  [Banana Jam],
+  description: [Sweet Jam],
+  authors: ([GrandMa],[GrandPa])
+)
+```
+The label used will reflect this and if you have multiples, they will appear with ',' between them.
 
 #### *label*
 
 This one is very important for me. You can add a label for your recipe and use it as a reference in other recipe.
 For example, you have a recipe for Pizza Dough and different pizza recipes.
-In the ingredients part of each of them you can reference the first recipe and the reference will be replaced by something like "Pizza Dough(p. 17)".
+First, you put a label to a recipe, then you can put a reference of the first recipe anywhere and it will be replaced by something like "Pizza Dough(p. 17)".
 
 Here is a small example of usage :
 
@@ -215,6 +229,9 @@ I prefer to use dictionaries for my tags, it can help you avoid mistakes (differ
 
 And you will see how it can help you build custom indexes in the *cookbook* part.
 
+#### change-palette
+If you want to change the palette when you describe a recipe, this property will do this for you.
+
 ## Cookbook
 
 The minimal cookbook usage :
@@ -225,7 +242,7 @@ The minimal cookbook usage :
   subtitle: "All that good"
 )
 
-= Soups
+#chapter[Soups]
 
 #recipe(
     [Soup of the day]
@@ -237,7 +254,7 @@ And then you can add chapter and recipes. But you can customize your cookbook wi
 ### paper
 This property is used to define the size of the pages.
 You can see all the available options here [Page Function](https://typst.app/docs/reference/layout/page/) at the paper property.
-The default size is "a4" and it was not tested with all the options.
+The default size is "a4" and it was not tested with all the options available.
 
 ### *subtitle*, *date* and *cover-image*
 
@@ -269,48 +286,59 @@ back-cover-image: back-cover-image("assets/hearts.jpg"),
 
 Finally, the *book-author* is visible only in the back cover page. So, if you set a value, you will see it in this page.
 
-### *theme* and *style*
+### *colors* and *style*
 
-*fancy-cookbook* loves colors and is available with 10 colored themes :
+*fancy-cookbook* loves colors and is available with 17 colored palettes:
 
+* amber
 * blue
 * brown
+* coral
+* forest
 * green
-* grey (the default one, not so fancy)
+* grey
 * indigo
+* lagoon
 * lime
 * orange
 * pink
 * purple
+* rose
+* slate (the default one)
+* sunset
 * teal
 
-A theme is something like this :
+You can see them in action in two styles :
+* [palettes-flat.pdf](https://github.com/Ajrarn/fancy-cookbook/tree/main/palettes-flat.pdf)
+* [palettes-gradient.pdf](https://github.com/Ajrarn/fancy-cookbook/tree/main/palettes-gradient.pdf)
+
+A palette is something like this :
 
 ```typ
-#let theme-lime = (
+#let palette-lime = (
   dark: rgb("#4d9221"),
   medium: rgb("#a6d96a"),
   light: rgb("#f7fcb9")
 )
 ```
 
-So when you need to set a theme you can use one of these and I will show you how, or create your own. You only need to respect the 3 keys : *dark*, *medium*, and *light*.
+So when you need to set a palette you can use one of these and I will show you how, or create your own. You only need to respect the 3 keys : *dark*, *medium*, and *light*.
 
-For the *cookbook* function, the theme should be set like this :
+For the *cookbook* function, the palette should be set like this :
 
 ```typ
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "All that good",
-  theme: themes.blue
+  palette: palette.blue
 )
 ```
-to use one of the themes in the package.
+to use one of the palettes in the package.
 
 Or you can do this :
 
 ```typ
-#let theme-lime = (
+#let palette-lime = (
   dark: rgb("#4d9221"),
   medium: rgb("#a6d96a"),
   light: rgb("#f7fcb9")
@@ -319,10 +347,12 @@ Or you can do this :
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "All that good",
-  theme: theme-lime
+  palette: palette-lime
 )
 ```
-to use yours. In this example, I used the theme *lime* that is already in the package.
+to use yours. In this example, I used the palette *lime* that is already in the package.
+
+If you want to change colors between chapters, like me, I recommand to use the `chapter` function that will be explained later.
 
 Now it's time to talk about *style*.
 This property has only effect on the ingredients block. There is 2 styles available :
@@ -331,7 +361,7 @@ This property has only effect on the ingredients block. There is 2 styles availa
   * The background is now a gradient between the medium color and the light one.
   * And to preserve contrast on the upper part, the dark color used for the groups titles is a little darker.
 
-To set the gradient style for your book you can write :
+To set the gradient style for your book you can write:
 
 ```typ
 #show: cookbook.with(
@@ -351,7 +381,7 @@ The 4 languages are :
 * **fr** : for french
 * **en** : for english
 * **es** for spanish
-* **por** : for portuguese
+* **pt** : for portuguese
 
 To set the current language in any part of the document you can use this instruction (which I recommend you to do every time, in all your document), example with french :
 
@@ -361,19 +391,33 @@ To set the current language in any part of the document you can use this instruc
 
 Do it before calling the *cookbook* function. You can also switch between recipe your language with this instruction, but I don't know why you would do that.
 
+Another way is to set the property *lang* of the *cookbook* function:
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  lang: "pt"
+)
+```
+
+But this will apply the language only for the cookbook itself, your document will "stay" in English.
+
+
 #### What can you do if your language is missing ?
 You can add your own language by setting a dictionary with the labels to translate and use the *custom-18n* property. Here is the English version :
 
 ```typ
 #let english = (
     en: (
-      toc: "Table of Contents",
-      ingredients: "INGREDIENTS",
-      preparation: "PREPARATION",
-      notes: "CHEF'S NOTES",
+      appendices: "Appendices",
       author: "AUTHOR",
-      annexes: "Appendices",
-      index: "Thematic Index"
+      authors: "AUTHORS",
+      index: "Thematic Index",
+      ingredients: "INGREDIENTS",
+      notes: "CHEF'S NOTES",
+      page-short: "p.", // this will appear with labels and references
+      preparation: "PREPARATION",
+      toc: "Table of Contents"
     )
 )
 
@@ -404,7 +448,7 @@ And only the toc label will be changed.
 
 ### chapter-start-right
 The chapters appear as a separation page with a big title in the middle (it's more like a part separation).
-I like when this page is on the right side, so impair numbering page.
+I like it when this page is on the right side, so impair numbering page.
 
 If you like it too, just add this property set to true like this :
 
@@ -417,7 +461,7 @@ If you like it too, just add this property set to true like this :
 ### custom-appendices
 The appendices section appears at the end if you set this property or if you add some tags to the recipes.
 
-This property adds what you want in the part, because it's simply a content. In my cookbook I used it to add a glossary, but you can add a bibliography or whatever you want.
+This property adds what you want in the part, because it simply accepts content. In my cookbook I used it to add a glossary, but you can add a bibliography or whatever you want.
 
 To set this property, I recommend to do it like that :
 
@@ -433,7 +477,7 @@ To set this property, I recommend to do it like that :
 )
 ```
 
-### indexes
+### custom-indexes
 As I have said for the tags in the *recipe* function or just before in the *custom-appendices* properties, the appendices section appears with a tag in a recipe.
 And if we do nothing it will have an index called in English "Thematic Index". This default index looks like the toc, but smaller.
 It will have all the keys you used as tags and the recipes that have this tags.
@@ -464,14 +508,14 @@ Here is an example with locations and types :
     tags: dict-values(location)
   ),
   (
-    title: [Recip by Types],
+    title: [Recipe by Types],
     tags: dict-values(type)
   )
 )
 
 #show: cookbook.with(
   title: "My Cookbook",
-  indexes: indexes
+  custom-indexes: indexes
 )
 
 #recipe(
@@ -488,33 +532,116 @@ Here is an example with locations and types :
 )
 ```
 
+### *custom-cover* and *custom-backcover*
+These properties let you design your own cover and back-cover and give it to the cookbook function:
+
+```typ
+#let cover = [
+    = Nice Cover
+    Some cool stuffs
+]
+
+#let back-cover = [
+    = Nice Back Cover
+    Some cool stuffs
+]
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  custom-cover: cover,
+  custom-back-cover: back-cover
+)
+```
+
+### only-recipes
+This property will set off the cover, the toc, the back-cover and the appendices if you set it to _true_:
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  only-recipes: true
+)
+```
+
+
 ## not-a-recipe
 
 Simple to use but it's optional. I have tried to minimize as much as possible the size of a recipe.
 So certain rules are not so nice when it's not a recipe.
 
-To add more space to a section with text, for explanations for example, I have made this function. So use it like this :
+To add more space to a section with text, for explanations for example, I created this function for that purpose. Use it as follows:
 
 ```typ
 #not-a-recipe(name: "Introduction")[
-    A lot of things to say with *bold text* and whatever you want.
+    Many things to say with *bold text* and whatever you want.
 ]
 ```
 
-## set-theme
-You can change the colors anywhere in your document by using this command :
+You can also change the language like for _recipe_:
 
 ```typ
-#set-theme(themes.green)
+#not-a-recipe(name: "Introduction", change-palette: palette.lagoon)[
+    Many things to say with *bold text* and whatever you want.
+]
 ```
 
-or another one or your custom theme. I used it for each chapter of my book (Starter, Main, Dessert, ...) with different colors.
+## chapter
+You can change the colors from a chapter in your document by using this command:
 
+```typ
+#chapter(change-palette: palette.green)[Main]
+```
 
+or another one or your custom palette. I used it for each chapter of my book (Starter, Main, Dessert, ...) with different colors.
 
+It's important to understand that the change is not only for the current chapter. It's start there and everything that follow will have the same. There's only one exception, As the appendices section and the back-cover are parts of *cookbook* they keep the palette chosen from *cookbook*.
 
+You can set a new chapter only (without changing colors) as follows:
 
+```typ
+#chapter[Main]
+```
 
+Or, if you prefer Markup:
 
+```typ
+= Main
+```
+And it's easy to do that if you never change the palettes. It's like you want.
 
+## set-all-palettes
+this function help you to manually set all the pages where the palette changes.
+When all your document is done you can choose manually every time you want to change colors like this:
 
+```typ
+#let pages-palettes = (
+  (palette: palette.blue, page: 3),
+  (palette: palette.green, page: 5),
+  (palette: palette.rose, page: 8),
+  (palette: palette.sunset, page: 10),
+)
+#set-all-palettes(pages-palettes)
+```
+
+## Utility functions
+There is 2 bonus functions that I use with this package.
+
+### dict-values
+I use this function to convert a dictionary to a list of values. I prefer to use dictionaries for my tags and with this function I can easily create custom indexes.
+There is an example of usage in the custom indexes part, and also the code of this functions
+
+### show-metadata
+
+I use this one for debugging. But if you want to see where the palette changes in the document, you need to do this:
+
+```typ
+#show-metadata(page-palette-meta-name)
+```
+Or if you want to see the metadata of the recipes (with tags):
+
+```typ
+#show-metadata(recipe-meta-name)
+```
+
+## Examples
+Finally, you can find examples in the [Github Project](https://github.com/Ajrarn/fancy-cookbook/tree/main/examples)
