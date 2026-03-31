@@ -1,7 +1,8 @@
-#import "@preview/ez-today:2.1.0"
+// #import "@preview/ez-today:2.1.0"
 #import "@preview/datify:1.0.1": *
 #import "../colors/colors.typ": *
 #import "../assets/fonts.typ": *
+#import "../i18n/i18n.typ": language-state
 
 #let cover-image = image.with(
     width: 100%,
@@ -36,7 +37,7 @@
     ]
     #context {
       place(bottom + center)[
-         #pad(bottom: 3cm, text(font: fonts.header, size: 0.8em, tracking: 3pt, fill: palette.dark, upper(custom-date-format(date, pattern: "MMMM yyyy", lang: text.lang))))
+         #pad(bottom: 3cm, text(font: fonts.header, size: 0.8em, tracking: 3pt, fill: palette.dark, upper(custom-date-format(date, pattern: "MMMM yyyy", lang: language-state.get()))))
       ]
     }
   ]

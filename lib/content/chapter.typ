@@ -2,9 +2,12 @@
 #import "../colors/colors.typ": set-palette
 
 
-#let chapter(palette: palette.grey, body) = context {  
+#let chapter(change-palette: none, body) = context {  
   [
     = #body
   ]
-  set-palette(palette)
+  if change-palette != none {
+    set-palette(change-palette)
+  }
+  
 }

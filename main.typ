@@ -3,10 +3,11 @@
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "little subtitle",
-  book-author: "Myself"
+  book-author: "Myself",
+  lang: "es"
 )
 
-#chapter(palette: palette.coral)[Here it is]
+#chapter[Here it is]
 
 #recipe(
   [Simple Recipe],
@@ -67,7 +68,10 @@
       ]
     )
   )
-)  
+)
+
+#show-metadata(page-palette-meta-name)
+#show-metadata(recipe-meta-name)
 
 
 

@@ -3,30 +3,16 @@
 
 #show: cookbook.with(
   title: "Palettes",
-  subtitle: "A sample with all palettes - style flat",
+  subtitle: "A sample with all palettes - style gradient",
   book-author: "Ajrarn",
   style: style.gradient,
   only-recipes: true
 )
 
-#let generate-palettes() = {
-  let local-palettes = ()
-  let page = 1
-
-  for pal in palette.values() {
-    local-palettes.push(
-      (palette: pal, page: page)
-    )
-    page +=1
-  }
-  local-palettes
-}
-
-#set-all-palettes(generate-palettes())
-
-#for palette in palette.keys() {
+#for pal in palette.keys() {
   recipe(
-    [#palette],
+    [#pal],
+    change-palette: palette.at(pal),
     description: [Not really a recipe],
     authors: [Myself],
     servings: 6,

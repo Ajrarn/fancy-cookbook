@@ -47,7 +47,7 @@
       preparation: "PREPARACIÓN",
       toc: "Tabla de Contenido"
     ),
-    por: (
+    pt: (
       appendices: "Anexos",
       author: "AUTOR",
       authors: "AUTORES",

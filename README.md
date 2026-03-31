@@ -24,12 +24,11 @@ There is different functions to make your cookbook :
 * `chapter`: This function can create a new chapter with a change of palette.
 * `cover-image`: This one will help you put a cover image with a good integration to the cookbook.
 * `back-cover-image`: This one is the same as the previous but for the back cover.
-* `next-palette`: if you want to use the markup for chapters, it will help you change color between chapters.
 * `set-all-palettes`: this function help you to manually set all the pages where the palette changes.
 
 ## Recipe
 
-Minimal syntax to use it with an example :
+Minimal syntax to use it with an example:
 
 ```typ
 #recipe(
@@ -61,7 +60,7 @@ You can see the page header with the book's title on the left and chapter title 
 The second mandatory part is **ingredients** which as you can see is a content with a list.
 The third mandatory part is **instructions** which is a content with a numbered list.
 
-This two parts wil be separate in two columns. And all the body part of the recipe will be in the left or the right column. Here it is :
+This two parts will be dispatch in two columns. And all the body part of the recipe will be in the left or the right column. Here it is:
 
 ![Recipe's body, where we can see the two columns with ingredients to the left and instructions to the right](bodyRecipe.png "Recipe's body")
 
@@ -113,7 +112,7 @@ That's it for the simplest recipe, but we have other options. First of all we ca
 
 So you can see that we have replaced the content with lists of dictionaries. The two known dictionaries have a key named *title*.
 For the ingredients, the key *items* will accept a content with a list, as it was before.
-For the instructions, the key *steps* will accept a content with a numbered as it was before.
+For the instructions, the key *steps* will accept a content with a numbered list as it was before.
 
 And the result is :
 
@@ -174,7 +173,7 @@ The label used will reflect this and if you have multiples, they will appear wit
 
 This one is very important for me. You can add a label for your recipe and use it as a reference in other recipe.
 For example, you have a recipe for Pizza Dough and different pizza recipes.
-In the ingredients part of each of them you can reference the first recipe and the reference will be replaced by something like "Pizza Dough(p. 17)".
+First, you put a label to a recipe, then you can put a reference of the first recipe anywhere and it will be replaced by something like "Pizza Dough(p. 17)".
 
 Here is a small example of usage :
 
@@ -231,7 +230,7 @@ I prefer to use dictionaries for my tags, it can help you avoid mistakes (differ
 And you will see how it can help you build custom indexes in the *cookbook* part.
 
 #### change-palette
-If you want to change the palette when you describe a recip, this property will do this for you.
+If you want to change the palette when you describe a recipe, this property will do this for you.
 
 ## Cookbook
 
@@ -243,7 +242,7 @@ The minimal cookbook usage :
   subtitle: "All that good"
 )
 
-= Soups
+#chapter[Soups]
 
 #recipe(
     [Soup of the day]
@@ -255,7 +254,7 @@ And then you can add chapter and recipes. But you can customize your cookbook wi
 ### paper
 This property is used to define the size of the pages.
 You can see all the available options here [Page Function](https://typst.app/docs/reference/layout/page/) at the paper property.
-The default size is "a4" and it was not tested with all the options.
+The default size is "a4" and it was not tested with all the options available.
 
 ### *subtitle*, *date* and *cover-image*
 
@@ -289,7 +288,7 @@ Finally, the *book-author* is visible only in the back cover page. So, if you se
 
 ### *colors* and *style*
 
-*fancy-cookbook* loves colors and is available with 10 colored palettes :
+*fancy-cookbook* loves colors and is available with 17 colored palettes:
 
 * amber
 * blue
@@ -309,6 +308,9 @@ Finally, the *book-author* is visible only in the back cover page. So, if you se
 * sunset
 * teal
 
+You can see them in action in two styles :
+* [palettes-flat.pdf](https://github.com/Ajrarn/fancy-cookbook/tree/main/palettes-flat.pdf)
+* [palettes-gradient.pdf](https://github.com/Ajrarn/fancy-cookbook/tree/main/palettes-gradient.pdf)
 
 A palette is something like this :
 
@@ -350,7 +352,7 @@ Or you can do this :
 ```
 to use yours. In this example, I used the palette *lime* that is already in the package.
 
-If you want to change colors between chapters, like me, I recommand to use the `chapter` function tha will be explain later.
+If you want to change colors between chapters, like me, I recommand to use the `chapter` function that will be explained later.
 
 Now it's time to talk about *style*.
 This property has only effect on the ingredients block. There is 2 styles available :
@@ -359,7 +361,7 @@ This property has only effect on the ingredients block. There is 2 styles availa
   * The background is now a gradient between the medium color and the light one.
   * And to preserve contrast on the upper part, the dark color used for the groups titles is a little darker.
 
-To set the gradient style for your book you can write :
+To set the gradient style for your book you can write:
 
 ```typ
 #show: cookbook.with(
@@ -379,7 +381,7 @@ The 4 languages are :
 * **fr** : for french
 * **en** : for english
 * **es** for spanish
-* **por** : for portuguese
+* **pt** : for portuguese
 
 To set the current language in any part of the document you can use this instruction (which I recommend you to do every time, in all your document), example with french :
 
@@ -389,19 +391,33 @@ To set the current language in any part of the document you can use this instruc
 
 Do it before calling the *cookbook* function. You can also switch between recipe your language with this instruction, but I don't know why you would do that.
 
+Another way is to set the property *lang* of the *cookbook* function:
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  lang: "pt"
+)
+```
+
+But this will apply the language only for the cookbook itself, your document will "stay" in English.
+
+
 #### What can you do if your language is missing ?
 You can add your own language by setting a dictionary with the labels to translate and use the *custom-18n* property. Here is the English version :
 
 ```typ
 #let english = (
     en: (
-      toc: "Table of Contents",
-      ingredients: "INGREDIENTS",
-      preparation: "PREPARATION",
-      notes: "CHEF'S NOTES",
+      appendices: "Appendices",
       author: "AUTHOR",
-      annexes: "Appendices",
-      index: "Thematic Index"
+      authors: "AUTHORS",
+      index: "Thematic Index",
+      ingredients: "INGREDIENTS",
+      notes: "CHEF'S NOTES",
+      page-short: "p.", // this will appear with labels and references
+      preparation: "PREPARATION",
+      toc: "Table of Contents"
     )
 )
 
@@ -492,7 +508,7 @@ Here is an example with locations and types :
     tags: dict-values(location)
   ),
   (
-    title: [Recip by Types],
+    title: [Recipe by Types],
     tags: dict-values(type)
   )
 )
@@ -561,29 +577,37 @@ To add more space to a section with text, for explanations for example, I create
 ]
 ```
 
-## chapter
-I you choose for the document the option for multicolor, you can change the colors of a chapter in your document by using this command:
+You can also change the language like for _recipe_:
 
 ```typ
-#chapter(palette: palette.green)[Main]
+#not-a-recipe(name: "Introduction", change-palette: palette.lagoon)[
+    Many things to say with *bold text* and whatever you want.
+]
+```
+
+## chapter
+You can change the colors from a chapter in your document by using this command:
+
+```typ
+#chapter(change-palette: palette.green)[Main]
 ```
 
 or another one or your custom palette. I used it for each chapter of my book (Starter, Main, Dessert, ...) with different colors.
 
-## next-palette
-If you want to use the markup for chapters, it will help you change color between chapters. You'll use it like this:
+It's important to understand that the change is not only for the current chapter. It's start there and everything that follow will have the same. There's only one exception, As the appendices section and the back-cover are parts of *cookbook* they keep the palette chosen from *cookbook*.
+
+You can set a new chapter only (without changing colors) as follows:
 
 ```typ
-#next-palette(palette: palette.green)
-= Main
+#chapter[Main]
 ```
-Because it's not easy to know when the next heading will appear you can adjust the offset of the next palette like this:
+
+Or, if you prefer Markup:
 
 ```typ
-#next-palette(palette: palette.green, offset: 1)
 = Main
 ```
-
+And it's easy to do that if you never change the palettes. It's like you want.
 
 ## set-all-palettes
 this function help you to manually set all the pages where the palette changes.
@@ -597,6 +621,26 @@ When all your document is done you can choose manually every time you want to ch
   (palette: palette.sunset, page: 10),
 )
 #set-all-palettes(pages-palettes)
+```
+
+## Utility functions
+There is 2 bonus functions that I use with this package.
+
+### dict-values
+I use this function to convert a dictionary to a list of values. I prefer to use dictionaries for my tags and with this function I can easily create custom indexes.
+There is an example of usage in the custom indexes part, and also the code of this functions
+
+### show-metadata
+
+I use this one for debugging. But if you want to see where the palette changes in the document, you need to do this:
+
+```typ
+#show-metadata(page-palette-meta-name)
+```
+Or if you want to see the metadata of the recipes (with tags):
+
+```typ
+#show-metadata(recipe-meta-name)
 ```
 
 ## Examples

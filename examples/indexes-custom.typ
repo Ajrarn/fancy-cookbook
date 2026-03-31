@@ -2,7 +2,7 @@
 
 #let dict-values(d) = d.keys().map(k => d.at(k))
 
-#let dict-un = (
+#let dict-one = (
   good: "Good",
   awful: "Awful"
 )
@@ -14,8 +14,8 @@
 
 #let indexes = (
   (
-    title: [Dict Un],
-    tags: dict-values(dict-un)
+    title: [Dict One],
+    tags: dict-values(dict-one)
   ),
   (
     title: [Dict Two],
@@ -30,12 +30,12 @@
   custom-indexes: indexes
 )
 
-#chapter(palette: palette.coral)[Here it is]
+#chapter(change-palette: palette.coral)[Here it is]
 
 #recipe(
   [Simple Recipe],
   description: [Not really a recipe],
-  tags: (dict-un.good, dict-two.cold),
+  tags: (dict-one.good, dict-two.cold),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -53,7 +53,7 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  tags: (dict-un.awful, dict-two.hot),
+  tags: (dict-one.awful, dict-two.hot),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],

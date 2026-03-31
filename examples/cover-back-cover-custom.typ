@@ -1,9 +1,23 @@
 #import "@local/fancy-cookbook:2.0.0": *
 
+#let cover = page(header: none)[
+  #text(size: 3em)[My Custom Title]
+
+  All Start from the beginning...
+]
+
+#let back-cover = page(header: none)[
+ #text(size: 2em)[My Custom Title]
+ 
+ This is the end, my only friend the end...
+]
+
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "little subtitle",
-  book-author: "Myself"
+  book-author: "Myself",
+  custom-cover: cover,
+  custom-back-cover: back-cover
 )
 
 #chapter(change-palette: palette.coral)[Here it is]
@@ -11,7 +25,6 @@
 #recipe(
   [Simple Recipe],
   description: [Not really a recipe],
-  authors: [Myself],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -29,7 +42,6 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  authors: [Myself],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -64,7 +76,7 @@
       steps: [
         + Put all together
         + Mix well
-        + Put everything in the garbage
+        + Put it all in the garbage
         + Call for a pizza
       ]
     )

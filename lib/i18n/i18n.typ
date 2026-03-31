@@ -1,7 +1,15 @@
 #import "translations.typ": translations 
 
-// =============== i18n =====================
+#let language-state = state("lang", "en")
 
+#let set-language(lang) = context {
+  if lang != none {
+    language-state.update(lang)
+  } else {
+    language-state.update(text.lang)
+  }
+  
+}
 
 // To merge the given dictionary with a custom one
 #let update-translation(t) = context {
@@ -20,11 +28,7 @@
 
 // translate the labels with text.lang ("en" by default)
 #let translate(key) = context {
-  let lang = if text.lang != none {
-      text.lang
-    } else {
-      "en"
-    }
+  let lang = language-state.get()
   let dict = translations.get().at(lang, default: translations.get().at("en"))
   dict.at(key, default: key)
 }

@@ -18,7 +18,7 @@
   book-author: "Myself"
 )
 
-#chapter(palette: palette.coral)[Here it is]
+#chapter(change-palette: palette.coral)[Here it is]
 
 #recipe(
   [Simple Recipe],

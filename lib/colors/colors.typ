@@ -19,21 +19,6 @@
   style-state.update(style)
 }
 
-// this state will get the value chapter-start-right
-#let chapter-on-right-state = state("chapter-on-right", false)
-
-
-// This counter will help us to know if the set-palette is just after the TOC pages
-#let set-palette-counter = counter("set-palette-counter")
-
-// ------------------ Init color system --------------------------------------
-#let init-color-system(style, chapter-on-right) = {
-  // init the state
-  chapter-on-right-state.update(chapter-on-right)
-  
-  // set the style between "flat" or "gradient"
-  set-style(style)
-}
 
 // --------------------- Colors for ingredients functions ----------------------
 
@@ -71,7 +56,7 @@
 
   // if not found → fallback
   if before.len() == 0 {
-    return palette.grey
+    return palette.slate
   }
 
   // We keep the last event
@@ -80,53 +65,13 @@
   last.value.palette
 }
 
-// this function is used in chapter or in the cover page to set the palette. it's not for the users
-#let set-palette(palette) = context {
+// this function is used in chapter, recipe or in the cover page to set the palette. it's not for the users
+#let set-palette(palette, from-recipe: false) = context {
   metadata((
     kind: page-palette-meta-name,
     palette: palette,
     page: here().position().page,
   ))
-  
-  set-palette-counter.step()
-}
-
-
-// This function is for the users, if they want to use the markup syntax for chapters
-// it will set the palette in the page where the next header (chapter or recipe) will appear 
-#let next-palette(palette, offset: none) = context {
-  
-  // in most of the case the chapter title will appear in the next page.
-  let local-offset = 1
-  // Now we want the current page
-  let current = here().position().page
-  
-  if offset != none {
-    local-offset = offset // if the offset is given no interpretation
-  } else {
-      
-    let chapter-on-right = chapter-on-right-state.get()
-  
-    let odd = calc.odd(current)
-  
-    if set-palette-counter.display() == "1" { 
-      // juste after the TOC we consider that next-palette is called in the same page
-      local-offset = 0 
-    
-      if chapter-on-right and odd == false {
-        local-offset += 1 // but in this case, there is one more page 
-      }
-      
-    } else {
-      if chapter-on-right and odd { // if chapter on right there is one more page
-        local-offset += 1 // which is 2
-      }
-    }
-  }
-  
-  // here we add the palette in the metadata
-  metadata((kind: page-palette-meta-name, palette: palette, page: current + local-offset))
-  set-palette-counter.step()
 }
 
 #let set-all-palettes(settings) = {

@@ -93,7 +93,6 @@ After (multiple authors):
 The `set-theme` function has been replaced by three more specialized functions that give you finer control over color changes:
 
 - **`chapter`**: creates a chapter separator page and sets the palette for that chapter.
-- **`next-palette`**: changes the palette at the next heading (supports an `offset` parameter).
 - **`set-all-palettes`**: lets you manually define all palette change points at once.
 
 Before:
@@ -104,8 +103,6 @@ Before:
 After:
 ```typ
 #chapter(palette: palette.green)[Main]
-// or
-#next-palette(palette: palette.green)
 // or
 #set-all-palettes(pages-palettes)
 ```

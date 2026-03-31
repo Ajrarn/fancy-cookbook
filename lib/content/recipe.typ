@@ -1,9 +1,12 @@
 #import "../colors/palettes.typ": style, palette-grey
-#import "../colors/colors.typ": page-palette, fill-ingredients, ingredient-group-color, style-state
+#import "../colors/colors.typ": page-palette, fill-ingredients, ingredient-group-color, style-state, set-palette
 #import "../assets/fonts.typ": fonts
 #import "../assets/icons.typ": make-icons
 #import "../i18n/i18n.typ": translate
 #import "../i18n/translations.typ": i18n-words
+
+// use a constant to avoid typing errors
+#let recipe-meta-name = "recipe"
 
 
 #let format-authors(authors) = {
@@ -36,11 +39,6 @@
   change-palette: none
 ) = context {
 
-  if change-palette != none {
-    set-palette(change-palette)
-  }
-
-  metadata((kind: "recipe", title: name, tags: tags, location: here(), page: here().position().page))
 
   // 1. Header Section
   let head = heading(level: 2, name)
@@ -49,6 +47,12 @@
   } else {
     head
   }
+
+  if change-palette != none {
+    set-palette(change-palette)
+  }
+
+  metadata((kind: recipe-meta-name, title: name, tags: tags, location: here(), page: here().position().page))
   
   // Where we get the color palette
   let current-palette = page-palette(here().page())

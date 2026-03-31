@@ -1,5 +1,5 @@
-#import "colors/colors.typ": style, palette, page-palette, init-color-system, set-palette
-#import "i18n/i18n.typ": update-translation, translate
+#import "colors/colors.typ": style, palette, page-palette, set-palette, set-style
+#import "i18n/i18n.typ": update-translation, translate, set-language
 #import "i18n/translations.typ": i18n-words
 #import "assets/fonts.typ": fonts
 #import "content/back-cover.typ": back-cover
@@ -26,10 +26,13 @@
   custom-cover: none,
   custom-back-cover:none,
   only-recipes: false,
+  lang: none,
   body
 ) = {
+
+  set-language(lang)
   
-  init-color-system(style, chapter-on-right)
+  set-style(style)
     
   // Add custom translation if exists
   if custom-i18n != none {
@@ -38,6 +41,13 @@
 
   // -------------- General Settings of the document --------------------  
   set document(title: title, author: book-author)
+
+  set text(
+    font: fonts.body,
+    size: 11pt,
+    features: (onum: 1)
+  )
+  
   
   set text(
     font: fonts.body,
@@ -53,7 +63,10 @@
 
       set par(spacing: 1.2em) // to protect from changes for the content
       let p = counter(page).get().first()
-      if p > 1 {
+      
+      let page-cover = if only-recipes {0} else {1}
+      
+      if p > page-cover {
         set text(font: fonts.header, size: 9pt, fill: palette.dark)
         
         // get the previous chapter for the header
@@ -61,7 +74,7 @@
         let chapter = if headings.len() > 0 {
           headings.last().body
         } else {
-          []
+          book-author
         }
         
         grid(
