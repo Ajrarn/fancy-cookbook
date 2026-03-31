@@ -1,4 +1,4 @@
-#import "@local/fancy-cookbook:2.0.0": *
+#import "@preview/fancy-cookbook:2.0.0": *
 
 #let appendices = not-a-recipe(name:"My appendice")[
   - *Something* : that I can explain.

@@ -1,4 +1,4 @@
-#import "@local/fancy-cookbook:2.0.0": *
+#import "@preview/fancy-cookbook:2.0.0": *
 
 #show: cookbook.with(
   title: "My Cookbook",
@@ -69,14 +69,3 @@
     )
   )
 )
-
-#show-metadata(page-palette-meta-name)
-#show-metadata(recipe-meta-name)
-
-
-
-
-
-
-
-
