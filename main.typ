@@ -70,8 +70,6 @@
   )
 )
 
-#show-metadata(page-palette-meta-name)
-#show-metadata(recipe-meta-name)
 
 
 
