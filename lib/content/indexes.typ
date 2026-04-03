@@ -25,7 +25,7 @@
 #let sort-key(r) = {
   let t = r.value.title
   
-  // Case 1 : sort-title in priority because explicitely defined
+  // Case 1 : sort-title in priority because explicitly defined
   if r.value.sort-title != none {
     return lower(content-to-str(r.value.sort-title))
   }
