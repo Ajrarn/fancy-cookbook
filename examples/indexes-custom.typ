@@ -23,6 +23,8 @@
   )
 )
 
+#let OEuf = [Œuf]
+
 #show: cookbook.with(
   title: "My Cookbook",
   subtitle: "little subtitle",
@@ -33,27 +35,9 @@
 #chapter(change-palette: palette.coral)[Here it is]
 
 #recipe(
-  [Simple Recipe],
-  description: [Not really a recipe],
-  tags: (dict-one.good, dict-two.cold),
-  servings: 6,
-  prep-time: [2 min],
-  cook-time: [10 min],
-  ingredients:[
-    - *1 l* of water
-    - *350 ml* of fruit juice
-  ],
-  instructions: [
-    + put all together
-    + shake well
-    + reserve in fridge
-  ]
-)
-
-#recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  tags: (dict-one.awful, dict-two.hot),
+  tags: (dict-one.good, dict-two.hot),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -94,6 +78,25 @@
     )
   )
 )  
+
+#recipe(
+  [#OEuf],
+  sort-title: "Oeuf",
+  description: [Not really a recipe],
+  tags: (dict-one.good, dict-two.cold),
+  servings: 6,
+  prep-time: [2 min],
+  cook-time: [10 min],
+  ingredients:[
+    - *1 l* of water
+    - *350 ml* of fruit juice
+  ],
+  instructions: [
+    + put all together
+    + shake well
+    + reserve in fridge
+  ]
+)
 
 
 
