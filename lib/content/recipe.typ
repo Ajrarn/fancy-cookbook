@@ -36,7 +36,8 @@
   authors: none,
   label: none,
   tags: (),
-  change-palette: none
+  change-palette: none,
+  sort-title: none
 ) = context {
 
 
@@ -52,7 +53,7 @@
     set-palette(change-palette)
   }
 
-  metadata((kind: recipe-meta-name, title: name, tags: tags, location: here(), page: here().position().page))
+  metadata((kind: recipe-meta-name, title: name, tags: tags, location: here(), page: here().position().page, sort-title: sort-title))
   
   // Where we get the color palette
   let current-palette = page-palette(here().page())
