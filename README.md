@@ -260,6 +260,18 @@ This property is used to define the size of the pages.
 You can see all the available options here [Page Function](https://typst.app/docs/reference/layout/page/) at the paper property.
 The default size is "a4" and it was not tested with all the options available.
 
+### margin
+If you want to control the margin of all the pages (except the cover), you can do it with this property
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  margin: (x: 2cm, top: 2.5cm, bottom: 2.5cm),
+)
+```
+
+to set the values see [Typst Documentation](https://typst.app/docs/reference/layout/page/#parameters-margin)
+
 ### *subtitle*, *date* and *cover-image*
 
 All of these properties are used in the cover page with the title. Set values to see what changes.

@@ -27,6 +27,7 @@
   custom-back-cover:none,
   only-recipes: false,
   lang: none,
+  margin: (x: 2cm, top: 2.5cm, bottom: 2.5cm),
   body
 ) = {
 
@@ -57,7 +58,7 @@
     
   set page(
     paper: paper,
-    margin: (x: 2cm, top: 2.5cm, bottom: 2.5cm),
+    margin: margin,
     header: context {
       let palette = page-palette(here().page())
 
@@ -86,8 +87,16 @@
         line(length: 100%, stroke: 0.5pt + palette.medium)
       }
     },
+    // footer: context {
+    //   let palette = page-palette(here().page())
+    //   set text(font: fonts.header, size: 9pt, fill: palette.dark)
+    //   let p = counter(page).get().first()
+    //   line(length: 100%, stroke: 0.5pt + palette.medium)
+    //   align(center)[— #p —]
+    // }
     footer: context {
       let palette = page-palette(here().page())
+      set par(spacing: 0.5em)  // ← réinitialise l'espacement
       set text(font: fonts.header, size: 9pt, fill: palette.dark)
       let p = counter(page).get().first()
       line(length: 100%, stroke: 0.5pt + palette.medium)
