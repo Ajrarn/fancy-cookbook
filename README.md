@@ -260,6 +260,18 @@ This property is used to define the size of the pages.
 You can see all the available options here [Page Function](https://typst.app/docs/reference/layout/page/) at the paper property.
 The default size is "a4" and it was not tested with all the options available.
 
+### margin
+If you want to control the margin of all the pages (except the cover), you can do it with this property
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  margin: (x: 2cm, top: 2.5cm, bottom: 2.5cm),
+)
+```
+
+to set the values see [Typst Documentation](https://typst.app/docs/reference/layout/page/#parameters-margin)
+
 ### *subtitle*, *date* and *cover-image*
 
 All of these properties are used in the cover page with the title. Set values to see what changes.
@@ -289,6 +301,33 @@ back-cover-image: back-cover-image("assets/hearts.jpg"),
 ```
 
 Finally, the *book-author* is visible only in the back cover page. So, if you set a value, you will see it in this page.
+
+### *custom-cover* and *custom-back-cover*
+These properties let you design your own cover and back-cover and give it to the cookbook function:
+
+```typ
+#let cover = [
+    = Nice Cover
+    Some cool stuffs
+]
+
+#let back-cover = [
+    = Nice Back Cover
+    Some cool stuffs
+]
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  custom-cover: cover,
+  custom-back-cover: back-cover
+)
+```
+
+### *front-matter* and *back-matter*
+You can have two other pages who appear at right for the *front-matter*, just after the cover and at left for back-matter just before the back cover.
+If you to print separatly the covers and the content like some services online, it's better to do that to keep a good page numeration.
+
+When I have used these properties, I dit it with the *citation-block* function that is described below.
 
 ### *colors* and *style*
 
@@ -374,7 +413,6 @@ To set the gradient style for your book you can write:
   style: style.gradient
 )
 ```
-
 
 ### custom-i18n
 
@@ -536,26 +574,7 @@ Here is an example with locations and types :
 )
 ```
 
-### *custom-cover* and *custom-backcover*
-These properties let you design your own cover and back-cover and give it to the cookbook function:
 
-```typ
-#let cover = [
-    = Nice Cover
-    Some cool stuffs
-]
-
-#let back-cover = [
-    = Nice Back Cover
-    Some cool stuffs
-]
-
-#show: cookbook.with(
-  title: "My Cookbook",
-  custom-cover: cover,
-  custom-back-cover: back-cover
-)
-```
 
 ### only-recipes
 This property will set off the cover, the toc, the back-cover and the appendices if you set it to _true_:
@@ -613,6 +632,15 @@ Or, if you prefer Markup:
 ```
 And it's easy to do that if you never change the palettes. It's like you want.
 
+You can also add a quote below your chapter title with these options: 
+
+```typ
+#chapter(
+  quote-content: [If you want to become a great chef, you have to work with great chefs. And that's exactly what I did.],
+  quote-author: [Gordon Ramsay],
+)[Main]
+```
+
 ## set-all-palettes
 this function help you to manually set all the pages where the palette changes.
 When all your document is done you can choose manually every time you want to change colors like this:
@@ -626,6 +654,37 @@ When all your document is done you can choose manually every time you want to ch
 )
 #set-all-palettes(pages-palettes)
 ```
+
+## citation-block
+
+The citation block used in the *chapter* function can be used elsewhere. I dit it myself for the back-matter and front-matter of my book (in French):
+```typ
+#let palette-cookbook = palette.indigo
+
+#let front-matter = citation-block(
+  content: [La cuisine, c'est quand les choses ont le goût de ce qu'elles sont.],
+  author: [Curnonsky],
+  palette: palette-cookbook
+)
+
+#let back-matter = citation-block(
+  content: [On apprend la cuisine avec celle des autres... à un moment donné on fait la sienne.],
+  author: [Jean-François Piège],
+  palette: palette-cookbook
+)
+
+#show: cookbook.with(
+  title: [My Cookbook],
+  subtitle: [So good],
+  palette: palette-cookbook,
+  front-matter: front-matter,
+  back-matter: back-matter
+)
+```
+
+I have set a value for the cookbook palette that I can use in the cookbook itself, the back-matter and the front-matter.
+It's okay because in my book I have appendices that implicitly set the same palette as the one used initially by the cookbook itself.
+If you don't have appendices, you can adjust the palette to be the same as the last one used.
 
 ## Utility functions
 There is 2 bonus functions that I use with this package.

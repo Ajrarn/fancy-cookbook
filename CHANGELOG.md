@@ -136,6 +136,12 @@ You can now change the palette directly from within a recipe using the `change-p
 #### `cookbook`: new `chapter-start-right` behavior
 
 The `chapter` function now integrates with `chapter-start-right` to ensure chapter separator pages always land on the correct side.
+
+#### back-matter and front-matter
+To add pages before and after all the content. Useful for publication.
+
+#### citation-block
+A new function to add quote blocks in chapter everywhere.
  
 ## [1.0.0]
 
