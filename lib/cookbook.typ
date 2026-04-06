@@ -28,6 +28,8 @@
   only-recipes: false,
   lang: none,
   margin: (x: 2cm, top: 2.5cm, bottom: 2.5cm),
+  front-matter : none,
+  back-matter: none,
   body
 ) = {
 
@@ -87,16 +89,9 @@
         line(length: 100%, stroke: 0.5pt + palette.medium)
       }
     },
-    // footer: context {
-    //   let palette = page-palette(here().page())
-    //   set text(font: fonts.header, size: 9pt, fill: palette.dark)
-    //   let p = counter(page).get().first()
-    //   line(length: 100%, stroke: 0.5pt + palette.medium)
-    //   align(center)[— #p —]
-    // }
     footer: context {
       let palette = page-palette(here().page())
-      set par(spacing: 0.5em)  // ← réinitialise l'espacement
+      set par(spacing: 0.5em)
       set text(font: fonts.header, size: 9pt, fill: palette.dark)
       let p = counter(page).get().first()
       line(length: 100%, stroke: 0.5pt + palette.medium)
@@ -153,11 +148,20 @@
     } else {
       cover(title, subtitle, date, palette, cover-image) 
     }
+
+    if front-matter != none {
+      if (chapter-on-right) {
+        pagebreak(to: "odd", weak: true)
+      }
+      page[
+        #front-matter
+      ]
+    }
      
     
     // -------------- TOC --------------------
-    if (chapter-on-right) {
-      pagebreak(to: "odd", weak: true)
+    if (chapter-on-right) { // Only exception the TOC will start on the left side
+      pagebreak(to: "even", weak: true)
     }
     toc(palette) 
   }
@@ -169,6 +173,15 @@
   // ---------------- Annexes ------------------
   if only-recipes == false {
     appendices(palette, custom-indexes, custom-appendices)
+
+    if back-matter != none {
+      if (chapter-on-right) {
+        pagebreak(to: "even", weak: true)
+      }
+      page[
+        #back-matter
+      ]
+    }
 
     // --------------- Back Cover -------------
     if custom-back-cover != none {

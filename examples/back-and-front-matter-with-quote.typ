@@ -1,0 +1,101 @@
+#import "@local/fancy-cookbook:2.0.0": *
+
+
+#let back-matter = [
+  #citation-block(
+    content: [When you have made as many mistakes as I have then you can be as good as me.],
+    author: [Wolfgang Puck],
+    palette: palette.coral
+  )
+]
+
+#let front-matter = [
+  #citation-block(
+    content: [Techniques are not the most difficult to teach.
+    
+    The attitudes chefs take are much more important.],
+    author: [Alain Ducasse],
+    palette: palette.slate
+  )
+]
+
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "little subtitle",
+  book-author: "Myself",
+  front-matter: front-matter,
+  back-matter: back-matter,
+  chapter-on-right: true,
+  back-cover-content: [Petit essai]
+)
+
+#chapter(change-palette: palette.coral)[Here it is]
+
+#recipe(
+  [Simple Recipe],
+  description: [Not really a recipe],
+  servings: 6,
+  prep-time: [2 min],
+  cook-time: [10 min],
+  ingredients:[
+    - *1 l* of water
+    - *350 ml* of fruit juice
+  ],
+  instructions: [
+    + put all together
+    + shake well
+    + reserve in fridge
+  ]
+)
+
+#recipe(
+  [Recipe With Groups],
+  description: [Not really a recipe],
+  servings: 6,
+  prep-time: [2 min],
+  cook-time: [10 min],
+  ingredients:(
+    (
+      title: [Liquid],
+      items: [
+        - *1 l* of water
+        - *350 ml* of fruit juice
+      ]
+    ),
+    (
+      title: [Solid],
+      items: [
+        - *300 mg* of wheat flour
+        - *12 g* of butter
+        - *150 g* of sugar
+      ]
+    )
+  ),
+  instructions: (
+    (
+      title: [Liquid],
+      steps: [
+        + put all together
+        + shake well
+        + reserve in fridge
+      ]
+    ),
+    (
+      title: [Solid],
+      steps: [
+        + Put all together
+        + Mix well
+        + Put it all in the garbage
+        + Call for a pizza
+      ]
+    )
+  )
+)  
+
+
+
+
+
+
+
+

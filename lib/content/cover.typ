@@ -1,4 +1,3 @@
-// #import "@preview/ez-today:2.1.0"
 #import "@preview/datify:1.0.1": *
 #import "../colors/colors.typ": *
 #import "../assets/fonts.typ": *

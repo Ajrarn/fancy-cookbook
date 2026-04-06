@@ -302,6 +302,10 @@ back-cover-image: back-cover-image("assets/hearts.jpg"),
 
 Finally, the *book-author* is visible only in the back cover page. So, if you set a value, you will see it in this page.
 
+### *front-matter* and *back-matter*
+You can have two other pages who appears at right for the *front-matter*, just after the cover and at left for back-matter just before the back cover.
+If you to print separatly the covers and the content like some services on line, it's better to do that to keep a good page numerotation.
+
 ### *colors* and *style*
 
 *fancy-cookbook* loves colors and is available with 17 colored palettes:
