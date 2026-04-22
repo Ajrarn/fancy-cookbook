@@ -53,7 +53,7 @@ Minimal syntax to use it with an example:
 ```
 The first part, with the name, the description, servings, prep-time and cook-time is for the header part of the recipe that you can see here :
 
-![Recipe's header with the title, the subtitle, the serving, the preparation time and the cooking time](https://github.com/Ajrarn/fancy-cookbook/blob/2.0.0/headerRecipe.png "Recipe's header")
+![Recipe's header with the title, the subtitle, the serving, the preparation time and the cooking time](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/headerRecipe.png "Recipe's header")
 
 You can see the page header with the book's title on the left and chapter title on the right and a line to separate from the header of the recipe which is also closed by a line
 
@@ -62,7 +62,7 @@ The third mandatory part is **instructions** which is a content with a numbered 
 
 This two parts will be dispatch in two columns. And all the body part of the recipe will be in the left or the right column. Here it is:
 
-![Recipe's body, where we can see the two columns with ingredients to the left and instructions to the right](https://github.com/Ajrarn/fancy-cookbook/blob/2.0.0/bodyRecipe.png "Recipe's body")
+![Recipe's body, where we can see the two columns with ingredients to the left and instructions to the right](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/bodyRecipe.png "Recipe's body")
 
 That's it for the simplest recipe, but we have other options. First of all we can have groups of ingredients and groups of instructions.
 
@@ -116,7 +116,7 @@ For the instructions, the key *steps* will accept a content with a numbered list
 
 And the result is :
 
-![Ingredients and Instructions grouped in blocks](https://github.com/Ajrarn/fancy-cookbook/blob/2.0.0/groupsBodyRecipe.png "Groups")
+![Ingredients and Instructions grouped in blocks](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/groupsBodyRecipe.png "Groups")
 
 As you can see the numbering continue even if the lists are in different groups.
 
@@ -145,7 +145,7 @@ notes will be placed in a block in the left column.
 This is the default behavior and that's why it's not named *notes-left*.
 But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have *notes-right*.
 
-#### *authors*
+#### authors
 
 
 If you want like me to credit authors for each recipe individually — your grandmother, for instance, this property is for you.
@@ -169,7 +169,7 @@ and if you have multiple authors :
 ```
 The label used will reflect this and if you have multiples, they will appear with ',' between them.
 
-#### *label*
+#### label
 
 This one is very important for me. You can add a label for your recipe and use it as a reference in other recipe.
 For example, you have a recipe for Pizza Dough and different pizza recipes.
@@ -194,7 +194,7 @@ Here is a small example of usage :
 ```
 
 
-#### *tags*
+#### tags
 The tags will not be seen in the recipe but will be used to create indexes that we will see in the *cookbook* part.
 But one thing to know is that if you put only one tag in a recipe, you'll have an appendices part with an index at the end of the book.
 
@@ -229,7 +229,7 @@ I prefer to use dictionaries for my tags, it can help you avoid mistakes (differ
 
 And you will see how it can help you build custom indexes in the *cookbook* part.
 
-#### *sort-title*
+#### sort-title
 When you use tags, you will have indexes, and I try to sort the recipes by their name. But sometimes, you use functions in the title of your recipe, sometimes, you use accents, and the sorted index will not appear like you want.
 So you can set this property with a value that will be compared to others (title or sort-title).
 
@@ -255,13 +255,17 @@ The minimal cookbook usage :
 You just need a title and a subtitle to make your cookbook.
 And then you can add chapter and recipes. But you can customize your cookbook with all the next properties.
 
-### paper
-This property is used to define the size of the pages.
-You can see all the available options here [Page Function](https://typst.app/docs/reference/layout/page/) at the paper property.
-The default size is "a4" and it was not tested with all the options available.
+### *paper*, *font-size* and *margin*
 
-### margin
-If you want to control the margin of all the pages (except the cover), you can do it with this property
+The *paper* property defines the page size.
+You can see all available options in the [Page Function](https://typst.app/docs/reference/layout/page/) 
+reference, under the `paper` parameter.
+When you change the page size, you will likely need to adjust the *font-size* property as well.
+The default value is *11pt*, which works well for A4 paper.
+
+Along with these two properties, you can also control the margins.
+To set uniform margins on all pages (except the cover), use the `margin` property:
+
 ```typ
 #show: cookbook.with(
   title: "My Cookbook",
@@ -270,7 +274,24 @@ If you want to control the margin of all the pages (except the cover), you can d
 )
 ```
 
-to set the values see [Typst Documentation](https://typst.app/docs/reference/layout/page/#parameters-margin)
+For all available margin options, refer to the 
+[Typst documentation](https://typst.app/docs/reference/layout/page/#parameters-margin).
+
+If you plan to print and bind your cookbook, Typst offers a particularly handy option worth 
+knowing about: the `inside` and `outside` margin values. Instead of thinking in terms of 
+left and right, these values adapt to whether a page is a recto (right-hand, odd) or a 
+verso (left-hand, even) — which is exactly what you need for a bound document. 
+The `inside` margin (the gutter, toward the spine) should be wider than the `outside` margin 
+to keep the text comfortably readable once the pages are bound together:
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  margin: (inside: 3cm, outside: 2cm, top: 2.5cm, bottom: 2.5cm),
+)
+```
+
 
 ### *subtitle*, *date* and *cover-image*
 
@@ -352,8 +373,8 @@ When I have used these properties, I dit it with the *citation-block* function t
 * teal
 
 You can see them in action in two styles :
-* [palettes-flat.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/2.0.0/palettes-flat.pdf)
-* [palettes-gradient.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/2.0.0/palettes-gradient.pdf)
+* [palettes-flat.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/palettes-flat.pdf)
+* [palettes-gradient.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/palettes-gradient.pdf)
 
 A palette is something like this :
 
@@ -707,4 +728,4 @@ Or if you want to see the metadata of the recipes (with tags):
 ```
 
 ## Examples
-Finally, you can find examples in the [Github Project](https://github.com/Ajrarn/fancy-cookbook/blob/2.0.0/examples)
+Finally, you can find examples in the [Github Project](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/examples)

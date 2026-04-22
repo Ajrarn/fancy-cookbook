@@ -1,11 +1,14 @@
-#import "@local/fancy-cookbook:2.0.0": *
+#import "@local/fancy-cookbook:2.1.0": *
+
 
 #show: cookbook.with(
+  paper: "a4",
   title: "My Cookbook",
   subtitle: "little subtitle",
   book-author: "Myself",
   lang: "es"
 )
+
 
 #chapter[Here it is]
 

@@ -91,7 +91,7 @@
     // -- Left Column: Ingredients --
     {
       if image-left != none  {
-        block(width: 100%, height: auto, clip: true, radius: 4pt, image-left)
+        block(width: 100%, height: auto, clip: true, radius: 0.4em, image-left)
         v(0.5em)
       }
       let style = style-state.get()
@@ -185,7 +185,7 @@
     {
       if image-right != none {
         align(center, {
-          block(width: 100%, height: auto, clip: true, radius: 4pt, image-right)
+          block(width: 100%, height: auto, clip: true, radius: 0.4em, image-right)
           v(0.5em)
         })
       }

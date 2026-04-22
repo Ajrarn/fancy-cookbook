@@ -30,6 +30,9 @@
   margin: (x: 2cm, top: 2.5cm, bottom: 2.5cm),
   front-matter : none,
   back-matter: none,
+  font-size: 11pt,
+  paper-width: none,
+  paper-height: none,
   body
 ) = {
 
@@ -47,19 +50,16 @@
 
   set text(
     font: fonts.body,
-    size: 11pt,
+    size: font-size,
     features: (onum: 1)
   )
-  
-  
-  set text(
-    font: fonts.body,
-    size: 11pt,
-    features: (onum: 1)
+
+  assert(
+    (paper-width == none) == (paper-height == none),
+    message: "paper-width and paper-height must be defined together"
   )
-    
-  set page(
-    paper: paper,
+
+  let page-args = (paper: paper,
     margin: margin,
     header: context {
       let palette = page-palette(here().page())
@@ -70,7 +70,7 @@
       let page-cover = if only-recipes {0} else {1}
       
       if p > page-cover {
-        set text(font: fonts.header, size: 9pt, fill: palette.dark)
+        set text(font: fonts.header, size: 0.9em, fill: palette.dark)
         
         // get the previous chapter for the header
         let headings = query(selector(heading.where(level: 1)).before(here()))
@@ -92,13 +92,20 @@
     footer: context {
       let palette = page-palette(here().page())
       set par(spacing: 0.5em)
-      set text(font: fonts.header, size: 9pt, fill: palette.dark)
+      set text(font: fonts.header, size: 0.9em, fill: palette.dark)
       let p = counter(page).get().first()
       line(length: 100%, stroke: 0.5pt + palette.medium)
       align(center)[— #p —]
     }
   )
-    
+
+  if paper-width != none and paper-height != none {
+    page-args.insert("width", paper-width)
+    page-args.insert("height", paper-height)
+  }
+  
+  set page(..page-args)
+     
     
   // Headings
   show heading.where(level: 1): it => {

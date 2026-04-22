@@ -1,35 +1,33 @@
 #import "@local/fancy-cookbook:2.1.0": *
 
+// Royal paper
+#let royal = (
+  width: 156mm,
+  height: 234mm
+)
 
-#let back-matter = [
-  #citation-block(
-    content: [When you have made as many mistakes as I have then you can be as good as me.],
-    author: [Wolfgang Puck],
-    palette: palette.coral
-  )
-]
-
-#let front-matter = [
-  #citation-block(
-    content: [Techniques are not the most difficult to teach.
-    
-    The attitudes chefs take are much more important.],
-    author: [Alain Ducasse],
-    palette: palette.slate
-  )
-]
+// greater margin in the inside of the book
+#let margin = (
+  inside: 22mm,
+  outside: 16mm,
+  top: 22mm,
+  bottom: 20mm
+)
 
 #show: cookbook.with(
+  paper-width: royal.width,
+  paper-height: royal.height,
+  margin: margin,
+  font-size: 8pt,
   title: "My Cookbook",
   subtitle: "little subtitle",
   book-author: "Myself",
-  front-matter: front-matter,
-  back-matter: back-matter,
-  chapter-on-right: true,
-  back-cover-content: [Petit essai]
+  lang: "es",
+  palette: palette.lagoon
 )
 
-#chapter(change-palette: palette.coral)[Here it is]
+
+#chapter[Here it is]
 
 #recipe(
   [Simple Recipe],
@@ -90,12 +88,4 @@
       ]
     )
   )
-)  
-
-
-
-
-
-
-
-
+)
