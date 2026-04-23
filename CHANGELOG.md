@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [2.1.0]
 
+### New Features
+
+Better control on paper size adjustment by addong: 
+- font-size : as the reference for all text
+- margin : for a better fit in different paper size.
+
+
+## [2.0.0]
+
 ### Bug Fixes
 
 - Fixed inconsistent color rendering across pages: colors are now applied coherently page by page throughout the entire document.
