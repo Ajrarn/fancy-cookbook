@@ -1,4 +1,4 @@
-#import "@local/fancy-cookbook:2.1.0": *
+#import "@preview/fancy-cookbook:2.1.0": *
 
 // Royal paper
 #let royal = (
