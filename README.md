@@ -311,7 +311,7 @@ this will ensure that your image integrate with the cover with efficiency.
 
 The back-cover is optional.
 But if you set a value for *back-cover-content* or *back-cover-image* the back-cover will appear.
-As the cover is at page 1 (impair page), the back-cover will always be in a pair page, to close your book.
+As the cover is at page 1 (odd page), the back-cover will always be in an even page, to close your book.
 
 As the name said, the *back-cover-content* property accept a content.
 
