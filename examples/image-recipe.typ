@@ -32,7 +32,7 @@
 
 #recipe(
   [Recipe With Groups],
-  image: (switch: true, content: image("../bodyRecipe.png")),
+  image: (column: column.instructions, content: image("../bodyRecipe.png")),
   description: [Not really a recipe],
   servings: 6,
   prep-time: [2 min],
@@ -79,7 +79,7 @@
   [Simple Recipe],
   description: [Not really a recipe],
   servings: 6,
-  image: (switch: false, content: image("../bodyRecipe.png")),
+  image: (column: column.ingredients, content: image("../bodyRecipe.png")),
   prep-time: [2 min],
   cook-time: [10 min],
   ingredients:[

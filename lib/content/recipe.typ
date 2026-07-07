@@ -8,6 +8,11 @@
 // use a constant to avoid typing errors
 #let recipe-meta-name = "recipe"
 
+#let column = (
+  ingredients: "ingredients",
+  instructions: "instructions"
+)
+
 
 #let format-authors(authors) = {
   if authors.len() == 1 {
@@ -85,7 +90,7 @@
   let recipe-image = none
   if image != none {
     if type(image) == content {
-      recipe-image = (switch: false, content: image)
+      recipe-image = (column: column.ingredients, content: image)
     } else {
       recipe-image = image
     }
@@ -95,15 +100,15 @@
   let recipe-notes = none
   if notes != none {
     if type(notes) == content {
-      recipe-notes = (switch: false, content: notes)
+      recipe-notes = (column: column.ingredients, content: notes)
     } else {
       recipe-notes = notes
     }
   }
 
-  let primary-block = {
+  let ingredients-column = {
     
-    if recipe-image != none and recipe-image.switch == false { 
+    if recipe-image != none and recipe-image.column == column.ingredients { 
       block(width: 100%, height: auto, clip: true, radius: 0.4em, recipe-image.content)
       v(0.5em)
     }
@@ -184,7 +189,7 @@
     
 
     // ---- notes
-    if recipe-notes != none and recipe-notes.switch == false {
+    if recipe-notes != none and recipe-notes.column == column.instructions {
       v(0.5em)
       block(breakable: false, {
         text(font: fonts-state.get().header, size: 0.9em, weight: "bold", fill: current-palette.dark, translate(i18n-words.notes))
@@ -194,8 +199,8 @@
     }
   }
 
-  let secondary-block = {
-    if recipe-image != none and recipe-image.switch == true { 
+  let instructions-column = {
+    if recipe-image != none and recipe-image.column == column.instructions { 
       align(center, {
         block(width: 100%, height: auto, clip: true, radius: 0.4em, recipe-image.content)
         v(0.5em)
@@ -245,7 +250,7 @@
     }
 
     // ---- notes secondary
-    if recipe-notes != none and recipe-notes.switch == true {
+    if recipe-notes != none and recipe-notes.column == column.instructions {
       v(0.5em)
       block(breakable: false, {
         text(font: fonts-state.get().header, size: 0.9em, weight: "bold", fill: current-palette.dark, translate(i18n-words.notes))
@@ -259,10 +264,10 @@
     columns: (35%, 1fr),
     gutter: 2.5em,
     
-    // -- Primary Column: Ingredients --
-    primary-block,
+    // -- Ingredients Column: Ingredients --
+    ingredients-column,
 
-    // -- Secondary Column: Instructions --    
-    secondary-block
+    // -- Instruction Column: Instructions --    
+    instructions-column
   )
 }
