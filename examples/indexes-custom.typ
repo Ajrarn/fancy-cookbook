@@ -1,4 +1,4 @@
-#import "@local/fancy-cookbook:2.1.0": *
+#import "@local/fancy-cookbook:3.0.0": *
 
 #let dict-values(d) = d.keys().map(k => d.at(k))
 

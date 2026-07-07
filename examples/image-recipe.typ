@@ -1,18 +1,22 @@
 #import "@local/fancy-cookbook:3.0.0": *
 
+
 #show: cookbook.with(
+  paper: "a4",
   title: "My Cookbook",
   subtitle: "little subtitle",
-  book-author: "Myself"
+  book-author: "Myself",
+  lang: "es"
 )
 
-#chapter(change-palette: palette.coral)[Here it is]
+
+#chapter[Here it is]
 
 #recipe(
   [Simple Recipe],
   description: [Not really a recipe],
-  authors: [Myself],
   servings: 6,
+  image: image("../bodyRecipe.png"),
   prep-time: [2 min],
   cook-time: [10 min],
   ingredients:[
@@ -28,8 +32,8 @@
 
 #recipe(
   [Recipe With Groups],
+  image: (switch: true, content: image("../bodyRecipe.png")),
   description: [Not really a recipe],
-  authors: [Myself],
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
@@ -64,17 +68,27 @@
       steps: [
         + Put all together
         + Mix well
-        + Put everything in the garbage
+        + Put it all in the garbage
         + Call for a pizza
       ]
     )
   )
-)  
+)
 
-
-
-
-
-
-
-
+#recipe(
+  [Simple Recipe],
+  description: [Not really a recipe],
+  servings: 6,
+  image: (switch: false, content: image("../bodyRecipe.png")),
+  prep-time: [2 min],
+  cook-time: [10 min],
+  ingredients:[
+    - *1 l* of water
+    - *350 ml* of fruit juice
+  ],
+  instructions: [
+    + put all together
+    + shake well
+    + reserve in fridge
+  ]
+)

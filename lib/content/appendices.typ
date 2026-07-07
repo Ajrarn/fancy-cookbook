@@ -2,7 +2,6 @@
 #import "indexes.typ": indexes, default-indexes
 #import "../i18n/i18n.typ": translate
 #import "../i18n/translations.typ": i18n-words
-#import "../assets/fonts.typ": fonts
 #import "recipe.typ": recipe-meta-name
 
 #let appendices(palette, custom-indexes, custom-appendices) = context {
@@ -17,7 +16,7 @@
   // We show appendices only if there is tags or custom appendices
   if all-tags.len() > 0 or custom-appendices!= none {
 
-    chapter(change-palette:palette, translate(i18n-words.appendices))
+    chapter(change-palette:palette, context translate(i18n-words.appendices))
 
     if all-tags.len() > 0 {
 

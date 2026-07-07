@@ -1,11 +1,12 @@
 #import "colors/colors.typ": style, palette, page-palette, set-palette, set-style
-#import "i18n/i18n.typ": update-translation, translate, set-language
-#import "i18n/translations.typ": i18n-words
-#import "assets/fonts.typ": fonts
+#import "i18n/i18n.typ": update-translation, translate, set-language, language-state
+#import "i18n/translations.typ": i18n-words, translations
+#import "assets/fonts.typ": fonts-state, set-fonts-state
 #import "content/back-cover.typ": back-cover
 #import "content/cover.typ": cover
 #import "content/toc.typ": toc
 #import "content/appendices.typ": appendices
+#import "checks/check-cookbook.typ": check-cookbook
 
 
 #let cookbook(
@@ -17,7 +18,7 @@
   cover-image: none,
   custom-i18n: none,
   style: style.flat,
-  chapter-on-right: false,
+  chapter-on-odd: false,
   palette: palette.slate,
   back-cover-content: none,
   back-cover-image: none,
@@ -31,10 +32,39 @@
   front-matter : none,
   back-matter: none,
   font-size: 11pt,
+  fonts: none,
   paper-width: none,
   paper-height: none,
   body
-) = {
+) = context {
+
+  check-cookbook(
+    title,
+    book-author,
+    subtitle,
+    date,
+    paper,
+    cover-image,
+    custom-i18n,
+    style,
+    chapter-on-odd,
+    palette,
+    back-cover-content,
+    back-cover-image,
+    custom-indexes,
+    custom-appendices,
+    custom-cover,
+    custom-back-cover,
+    only-recipes,
+    lang,
+    margin,
+    front-matter,
+    back-matter,
+    font-size,
+    fonts,
+    paper-width,
+    paper-height
+  )
 
   set-language(lang)
   
@@ -45,11 +75,16 @@
     update-translation(custom-i18n)
   }
 
+  //Custom fonts
+  if fonts != none {
+    set-fonts-state(fonts)
+  }
+
   // -------------- General Settings of the document --------------------  
   set document(title: title, author: book-author)
 
   set text(
-    font: fonts.body,
+    font: fonts-state.get().body,
     size: font-size,
     features: (onum: 1)
   )
@@ -70,7 +105,7 @@
       let page-cover = if only-recipes {0} else {1}
       
       if p > page-cover {
-        set text(font: fonts.header, size: 0.9em, fill: palette.dark)
+        set text(font: fonts-state.get().header, size: 0.9em, fill: palette.dark)
         
         // get the previous chapter for the header
         let headings = query(selector(heading.where(level: 1)).before(here()))
@@ -82,8 +117,8 @@
         
         grid(
           columns: (1fr, 1fr),
-          align(left, title),
-          align(right, chapter)
+          align(start, title),
+          align(end, chapter)
         )
         v(-0.8em)
         line(length: 100%, stroke: 0.5pt + palette.medium)
@@ -92,10 +127,11 @@
     footer: context {
       let palette = page-palette(here().page())
       set par(spacing: 0.5em)
-      set text(font: fonts.header, size: 0.9em, fill: palette.dark)
+      set text(font: fonts-state.get().header, size: 0.9em, fill: palette.dark)
       let p = counter(page).get().first()
       line(length: 100%, stroke: 0.5pt + palette.medium)
-      align(center)[— #p —]
+     
+      align(center)[— #numbering(translate(i18n-words.page-numbering),p) —]
     }
   )
 
@@ -110,7 +146,7 @@
   // Headings
   show heading.where(level: 1): it => {
 
-    if chapter-on-right {
+    if chapter-on-odd {
       pagebreak(to: "odd", weak: true)
     } else {
       pagebreak(weak: true)
@@ -122,7 +158,7 @@
     
       set align(center + horizon)
       block(width: 100%)[
-        #text(font: fonts.header, weight: "black", size: 3.5em, fill: palette.dark, it.body)
+        #text(font: fonts-state.get().header, weight: "black", size: 3.5em, fill: palette.dark, it.body)
       ]
     }
   }
@@ -130,7 +166,7 @@
   show heading.where(level: 2): it => {
     pagebreak(weak: true)
     block(below: 1.5em,
-      text(font: fonts.header, weight: "bold", size: 2.2em, it.body)
+      text(font: fonts-state.get().header, weight: "bold", size: 2.2em, it.body)
     )
   }
 
@@ -140,7 +176,7 @@
     if el != none and el.func() == heading and el.level == 2 {
       context {
         let p = el.location().position().page
-        link(el.location())[#el.body (#translate(i18n-words.page-short) #p)] 
+        link(el.location())[#el.body (#numbering(translate(i18n-words.page-ref-numbering),p))]
       }
     } else {
       it
@@ -157,7 +193,7 @@
     }
 
     if front-matter != none {
-      if (chapter-on-right) {
+      if (chapter-on-odd) {
         pagebreak(to: "odd", weak: true)
       }
       page[
@@ -167,7 +203,7 @@
      
     
     // -------------- TOC --------------------
-    if (chapter-on-right) { // Only exception the TOC will start on the left side
+    if (chapter-on-odd) { // Only exception the TOC will start on the left side
       pagebreak(to: "even", weak: true)
     }
     toc(palette) 

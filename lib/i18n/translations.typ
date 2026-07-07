@@ -6,14 +6,42 @@
   index: "index",
   ingredients: "ingredients",
   notes: "notes",
-  page-short: "page-short",
   preparation: "preparation",
-  toc: "toc"
+  toc: "toc",
+  page-numbering: "page-numbering",
+  page-ref-numbering: "page-ref-numbering", 
+  step-numbering : "step-numbering"
 )
 
 #let translations = state(
   "translations",
   (
+    ar: (
+      appendices: "الملاحق",
+      author: "المؤلف",
+      authors: "المؤلفون",
+      index: "الفهرس الموضوعي",
+      ingredients: "المكونات",
+      notes: "ملاحظات الشيف",
+      preparation: "التحضير",
+      toc: "جدول المحتويات",
+      page-numbering: "١",   
+      page-ref-numbering: "١ ص",
+      step-numbering: "١"    
+    ),
+    de: (
+      appendices: "Anhänge",
+      author: "AUTOR",
+      authors: "AUTOREN",
+      index: "Thematischer Index",
+      ingredients: "ZUTATEN",
+      notes: "ANMERKUNGEN DES KÜCHENCHEFS",
+      preparation: "ZUBEREITUNG",
+      toc: "Inhaltsverzeichnis",
+      page-numbering: "1",
+      page-ref-numbering: "S. 1", 
+      step-numbering: "1"
+    ),
     fr: (
       appendices: "Annexes",
       author: "AUTEUR",
@@ -21,9 +49,24 @@
       index: "Index Thématique",
       ingredients: "INGRÉDIENTS",
       notes: "NOTES DU CHEF",
-      page-short: "p.",
       preparation: "PRÉPARATION",
-      toc: "Table des Matières"
+      toc: "Table des Matières",
+      page-numbering: "1",
+      page-ref-numbering: "p. 1", 
+      step-numbering: "1"
+    ),
+    it: (
+      appendices: "Appendici",
+      author: "AUTORE",
+      authors: "AUTORI",
+      index: "Indice Tematico",
+      ingredients: "INGREDIENTI",
+      notes: "NOTE DELLO CHEF",
+      preparation: "PREPARAZIONE",
+      toc: "Indice",
+      page-numbering: "1",
+      page-ref-numbering: "p. 1",
+      step-numbering: "1"
     ),
     en: (
       appendices: "Appendices",
@@ -32,9 +75,11 @@
       index: "Thematic Index",
       ingredients: "INGREDIENTS",
       notes: "CHEF'S NOTES",
-      page-short: "p.",
       preparation: "PREPARATION",
-      toc: "Table of Contents"
+      toc: "Table of Contents",
+      page-numbering: "1",
+      page-ref-numbering: "p. 1", 
+      step-numbering: "1"
     ),
     es: (
       appendices: "Anexidades",
@@ -43,9 +88,49 @@
       index: "Índice temático",
       ingredients: "INGREDIENTES",
       notes: "NOTAS DEL CHEF",
-      page-short: "p.",
       preparation: "PREPARACIÓN",
-      toc: "Tabla de Contenido"
+      toc: "Tabla de Contenido",
+      page-numbering: "1",
+      page-ref-numbering: "p. 1", 
+      step-numbering: "1"
+    ),
+    ja: (
+      appendices: "付録",
+      author: "著者",
+      authors: "著者一覧",
+      index: "テーマ別索引",
+      ingredients: "材料",
+      notes: "シェフのメモ",
+      preparation: "下準備",
+      toc: "目次",
+      page-numbering: "1",
+      page-ref-numbering: "1頁", 
+      step-numbering: "1"
+    ),
+    ko: (
+      appendices: "부록",
+      author: "저자",
+      authors: "저자 목록",
+      index: "주제별 색인",
+      ingredients: "재료",
+      notes: "셰프 노트",
+      preparation: "준비",
+      toc: "목차",
+      page-numbering: "1",
+      step-numbering: "1"
+    ),
+    nl: (
+      appendices: "Bijlagen",
+      author: "AUTEUR",
+      authors: "AUTEURS",
+      index: "Thematische Index",
+      ingredients: "INGREDIËNTEN",
+      notes: "NOTITIES VAN DE CHEF",
+      preparation: "BEREIDING",
+      toc: "Inhoudsopgave",
+      page-numbering: "1",
+      page-ref-numbering: "p. 1",
+      step-numbering: "1"
     ),
     pt: (
       appendices: "Anexos",
@@ -54,11 +139,37 @@
       index: "Índice Temático",
       ingredients: "INGREDIENTES",
       notes: "NOTAS DO CHEF",
-      page-short: "p.",
       preparation: "PREPARAÇÃO",      
-      toc: "Índice"
+      toc: "Índice",
+      page-numbering: "1",
+      page-ref-numbering: "p. 1", 
+      step-numbering: "1"
+    ),
+    ru: (
+      appendices: "Приложения",
+      author: "АВТОР",
+      authors: "АВТОРЫ",
+      index: "Тематический указатель",
+      ingredients: "ИНГРЕДИЕНТЫ",
+      notes: "ЗАМЕТКИ ШЕФА",
+      preparation: "ПРИГОТОВЛЕНИЕ",
+      toc: "Оглавление",
+      page-numbering: "1",
+      page-ref-numbering: "с. 1",  
+      step-numbering: "1"
+    ),
+    zh: (
+      appendices: "附录",
+      author: "作者",
+      authors: "作者列表",
+      index: "主题索引",
+      ingredients: "食材",
+      notes: "厨师备注",
+      preparation: "准备工作",
+      toc: "目录",
+      page-numbering: "1",
+      page-ref-numbering: "第1页",  
+      step-numbering: "1"
     )
   )
 )
-
-

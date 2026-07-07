@@ -1,4 +1,4 @@
-#import "@local/fancy-cookbook:2.1.0": *
+#import "@local/fancy-cookbook:3.0.0": *
 
 #show: cookbook.with(
   title: "My Cookbook",
@@ -29,7 +29,7 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  notes-right: [Something to say about it.],
+  notes: (switch: true, content:[Something to say about it.]),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],

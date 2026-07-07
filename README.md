@@ -122,18 +122,18 @@ As you can see the numbering continue even if the lists are in different groups.
 
 ### Other optional properties
 
-#### *image-left* and *image-right*
+#### *image-primary* and *image-secondary*
 
 ```typ
 #recipe(
   [Lychee whiskey],
   description: [Perfumed Whisky],
-  image-left: image("asset/whisky.png")  // image-right or both
+  image-primary: image("asset/whisky.png")  // image-secondary or both
 )
 ```
 You can add images to the recipe, one is for the left column and the other for the right one. This option can let you adjust your recipe to fit in one page if you want.
 
-#### *notes* and *notes-right*
+#### *notes* and *notes-secondary*
 ```typ
 #recipe(
   [Lychee whiskey],
@@ -142,8 +142,8 @@ You can add images to the recipe, one is for the left column and the other for t
 )
 ```
 notes will be placed in a block in the left column.
-This is the default behavior and that's why it's not named *notes-left*.
-But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have *notes-right*.
+This is the default behavior and that's why it's not named *notes-primary*.
+But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have *notes-secondary*.
 
 #### authors
 

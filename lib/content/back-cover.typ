@@ -1,10 +1,10 @@
 #import "../colors/colors.typ": *
-#import "../assets/fonts.typ": *
+#import "../assets/fonts.typ": fonts-state
 
 // Back cover image
 #let back-cover-image = image.with(width: 60%)
 
-#let back-cover(title, book-author, back-cover-content,back-cover-image,palette) = {
+#let back-cover(title, book-author, back-cover-content,back-cover-image,palette) = context {
   pagebreak(to:"even", weak:true)
     page(margin: 5cm, header: none, footer: none)[
 
@@ -13,7 +13,7 @@
       #place(center + horizon)[
 
         // Title
-        #text(font: fonts.header, weight: "bold", fill: palette.dark, size: 2em, title)
+        #text(font: fonts-state.get().header, weight: "bold", fill: palette.dark, size: 2em, title)
 
         // Back cover image
         #if back-cover-image != none {
@@ -25,11 +25,11 @@
         }
         // back cover content
         #if back-cover-content != none {  
-          text(font: fonts.header, size: 1em, tracking: 2pt, back-cover-content)
+          text(font: fonts-state.get().header, size: 1em, tracking: 2pt, back-cover-content)
         }
         // author
         #par(
-            text(font: fonts.header, style: "italic", fill: palette.dark, size: 1.2em, book-author)
+            text(font: fonts-state.get().header, style: "italic", fill: palette.dark, size: 1.2em, book-author)
           )
       ]
     ]

@@ -1,4 +1,4 @@
-#import "../assets/fonts.typ": fonts 
+#import "../assets/fonts.typ": fonts-state
 #import "../i18n/i18n.typ": translate
 #import "../i18n/translations.typ": i18n-words
 
@@ -41,8 +41,8 @@
 }
 
 
-#let indexes(recipes,custom-indexes, palette) = {
-  for index in custom-indexes {
+#let indexes(recipes, indexes, palette) = {  
+  for index in indexes {
     heading(level: 2, index.title)
   
     for tag in index.tags {
@@ -50,7 +50,7 @@
         #box(width:70%)[
           // Tag
           #v(0.5em)
-          #text(font: fonts.header, weight: "black", fill: palette.dark, size: 0.8em, upper(tag))
+          #text(font: fonts-state.get().header, weight: "black", fill: palette.dark, size: 0.8em, upper(tag))
           #h(1fr)
         ]
       ]
@@ -66,9 +66,9 @@
           #v(0.05em)
           #box(width: 65%)[
                 #link(r.value.location)[
-                  #text(font: fonts.body, size: 0.8em, r.value.title)
+                  #text(font: fonts-state.get().body, size: 0.8em, r.value.title)
                   #box(width: 1fr, repeat[ #h(0.3em) #text(fill: palette.dark, size: 0.6em)[.] #h(0.3em) ])
-                  #text(font: fonts.header, size: 0.8em, weight: "bold", fill: palette.dark, [#r.value.page])
+                  #text(font: fonts-state.get().header, size: 0.8em, weight: "bold", fill: palette.dark, [#r.value.page])
                 ]
               ]
           ]
@@ -83,7 +83,7 @@
                         .dedup()
                         .sorted()
   
-                        let index = (
+  let index = (
     title: [#translate(i18n-words.index)],
     tags: all-tags
   )
