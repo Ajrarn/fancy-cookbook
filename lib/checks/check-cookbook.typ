@@ -1,51 +1,8 @@
 #import "../colors/palettes.typ": style
 #import "../colors/palettes.typ": palette
+#import "./tools.typ" : *
 
-#let check-type(name, value, expected-types, with-none: false) = {
-  let ok = true
-  let expected-types_display = expected-types.map(str).join(" or ")
-  
-  if with-none == true {
-    expected-types_display = "none or " + expected-types_display
-  }
-  
 
-  if with-none != true or value != none {
-    ok = expected-types.any(t => type(value) == t)
-  }
-
-  assert(ok, message:
-    "Invalid parameter `" + name + ".\n" +
-    "  Received    : " + str(type(value)) + " (" + repr(value) + ")\n" +
-    "  Expected : " + expected-types_display
-  )
-}
-
-#let check-expected-keys(name, value, expected-keys) = {
-  // expected-keys: dictionnaire (key: type-attendu ou tableau de types)
-  for (key, expected-types) in expected-keys {
-    assert(key in value,
-      message: "`" + name + "` must contain the key \"" + key + "\"")
-
-    let expected-types = if type(expected-types) == array { expected-types } else { (expected-types,) }
-    let val = value.at(key)
-    let ok = expected-types.any(t => type(val) == t)
-    assert(ok,
-      message: "`" + name + "." + key + "` must be of type " + expected-types.map(str).join(" or ") + ", received: " + str(type(val)))
-  }
-}
-
-#let check-allowed-keys(name, value, allowed-keys) = {
-  for (key, val) in value {
-    assert(key in allowed-keys,
-      message: "`" + name + "` contains unexpected key \"" + key + "\". Allowed keys: " + allowed-keys.keys().join(", "))
-
-    let expected-types = allowed-keys.at(key)
-    let ok = expected-types.any(t => type(val) == t)
-    assert(ok,
-      message: "`" + name + "." + key + "` must be of type " + expected-types.map(str).join(" or ") + ", received: " + str(type(val)))
-  }
-}
 
 #let check-fonts(value) = {
   if value != none {
@@ -127,6 +84,23 @@
   } 
 }
 
+#let check-custom-indexes(value) = {  
+  if value != none {
+
+    check-type("custom-indexes", value, (array,))
+    
+    let expected-keys = (
+      title: (str, content),
+      tags: (array,)
+    )
+
+    for elt in value {
+      check-expected-keys("element in custom-indexes", elt, expected-keys)
+    }
+      
+  }
+}
+
 #let check-cookbook(
   title,
   book-author,
@@ -166,7 +140,7 @@
   check-palette(palette)
   check-type("back-cover-content", back-cover-content, (content,), with-none: true)
   check-type("back-cover-image", back-cover-image, (content,), with-none: true)
-  check-type("custom-indexes", custom-indexes, (content,), with-none: true)
+  check-custom-indexes(custom-indexes)
   check-type("custom-appendices", custom-appendices, (content,), with-none: true)
   check-type("custom-cover", custom-cover, (content,), with-none: true)
   check-type("custom-back-cover", custom-back-cover, (content,), with-none: true)

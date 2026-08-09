@@ -1,7 +1,5 @@
 #import "@local/fancy-cookbook:3.0.0": *
 
-#let dict-values(d) = d.keys().map(k => d.at(k))
-
 #let dict-one = (
   good: "Good",
   awful: "Awful"
@@ -15,11 +13,11 @@
 #let indexes = (
   (
     title: [Dict One],
-    tags: dict-values(dict-one)
+    tags: dict-one.values()
   ),
   (
     title: [Dict Two],
-    tags: dict-values(dict-two)
+    tags: dict-two.values()
   )
 )
 

@@ -25,7 +25,7 @@
   book-author: "Myself",
   front-matter: front-matter,
   back-matter: back-matter,
-  chapter-on-right: true,
+  chapter-on-odd: true,
   back-cover-content: [Petit essai]
 )
 

@@ -218,7 +218,7 @@
     appendices(palette, custom-indexes, custom-appendices)
 
     if back-matter != none {
-      if (chapter-on-right) {
+      if (chapter-on-odd) {
         pagebreak(to: "even", weak: true)
       }
       page[

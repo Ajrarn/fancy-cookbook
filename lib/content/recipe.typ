@@ -4,14 +4,13 @@
 #import "../assets/icons.typ": make-icons
 #import "../i18n/i18n.typ": translate
 #import "../i18n/translations.typ": i18n-words
+#import "constant.typ": column
+#import "../checks/check-recipe.typ" : check-recipe
 
 // use a constant to avoid typing errors
 #let recipe-meta-name = "recipe"
 
-#let column = (
-  ingredients: "ingredients",
-  instructions: "instructions"
-)
+
 
 
 #let format-authors(authors) = {
@@ -42,6 +41,23 @@
   change-palette: none,
   sort-title: none
 ) = context {
+
+  check-recipe(
+    name,
+    ingredients,
+    instructions,
+    description,
+    image,
+    servings,
+    prep-time,
+    cook-time,
+    notes,
+    authors,
+    label,
+    tags,
+    change-palette,
+    sort-title
+  )
 
 
   // 1. Header Section
@@ -189,7 +205,7 @@
     
 
     // ---- notes
-    if recipe-notes != none and recipe-notes.column == column.instructions {
+    if recipe-notes != none and recipe-notes.column == column.ingredients {
       v(0.5em)
       block(breakable: false, {
         text(font: fonts-state.get().header, size: 0.9em, weight: "bold", fill: current-palette.dark, translate(i18n-words.notes))

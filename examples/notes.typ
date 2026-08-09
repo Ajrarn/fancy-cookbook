@@ -29,7 +29,7 @@
 #recipe(
   [Recipe With Groups],
   description: [Not really a recipe],
-  notes: (switch: true, content:[Something to say about it.]),
+  notes: (column: column.instructions, content:[Something to say about it.]),
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
