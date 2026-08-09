@@ -79,7 +79,7 @@
 
 #let check-tags(value) = {
   if value != none {
-    check-type("tags",value, (array,))
+    check-type("tags",value, (array, str, content))
 
     if type(value) == array {
       for elt in value {
@@ -122,7 +122,7 @@
   check-instructions(instructions)
   check-type("description",description, (str,content), with-none: true)
   check-image(image)
-  check-type("servings",servings, (int, str), with-none: true)
+  check-type("servings",servings, (int, str, content), with-none: true)
   check-type("prep-time", prep-time, (str, content), with-none: true)
   check-type("cook-time",name, (str, content), with-none: true)
   check-notes(notes)

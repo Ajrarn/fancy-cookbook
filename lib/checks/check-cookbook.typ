@@ -128,9 +128,9 @@
   paper-width,
   paper-height
 ) = {
-  check-type("title", title, (str,))
-  check-type("book-author", book-author, (str,))
-  check-type("subtitle", subtitle, (str,))
+  check-type("title", title, (str, content))
+  check-type("book-author", book-author, (str, content))
+  check-type("subtitle", subtitle, (str, content))
   check-type("date", date, (datetime,))
   check-type("paper", paper, (str,))
   check-type("cover-image", cover-image, (content,), with-none: true)
