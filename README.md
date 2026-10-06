@@ -4,6 +4,15 @@ Inspired by the excellent [chef-cookbook](https://typst.app/universe/package/che
 
 So this is a template to write some recipes in a coherent cookbook with beautiful colors, appendices, indexes, and other stuffs in your language.
 
+## Highlights
+
+- Recipe-first cookbook layout with chapter separators, indexes, and appendices.
+- Flexible palette system with custom palettes and per-chapter palette changes.
+- Support for internationalized labels and RTL languages such as Arabic and Japanese.
+- Custom font family support for body, headers, and monospace text.
+- Built-in `equipment` block for listing kitchen tools and utensils.
+- Validation helpers for recipe and cookbook sanity checks.
+
 ## How to use it ?
 
 You can use this template in the Typst web app by clicking "Start from template" on the dashboard and searching for `fancy-cookbook`.
@@ -53,7 +62,7 @@ Minimal syntax to use it with an example:
 ```
 The first part, with the name, the description, servings, prep-time and cook-time is for the header part of the recipe that you can see here :
 
-![Recipe's header with the title, the subtitle, the serving, the preparation time and the cooking time](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/headerRecipe.png "Recipe's header")
+![Recipe's header with the title, the subtitle, the serving, the preparation time and the cooking time](https://github.com/Ajrarn/fancy-cookbook/blob/3.0.0/headerRecipe.png "Recipe's header")
 
 You can see the page header with the book's title on the left and chapter title on the right and a line to separate from the header of the recipe which is also closed by a line
 
@@ -62,7 +71,7 @@ The third mandatory part is **instructions** which is a content with a numbered 
 
 This two parts will be dispatch in two columns. And all the body part of the recipe will be in the left or the right column. Here it is:
 
-![Recipe's body, where we can see the two columns with ingredients to the left and instructions to the right](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/bodyRecipe.png "Recipe's body")
+![Recipe's body, where we can see the two columns with ingredients to the left and instructions to the right](https://github.com/Ajrarn/fancy-cookbook/blob/3.0.0/bodyRecipe.png "Recipe's body")
 
 That's it for the simplest recipe, but we have other options. First of all we can have groups of ingredients and groups of instructions.
 
@@ -116,11 +125,35 @@ For the instructions, the key *steps* will accept a content with a numbered list
 
 And the result is :
 
-![Ingredients and Instructions grouped in blocks](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/groupsBodyRecipe.png "Groups")
+![Ingredients and Instructions grouped in blocks](https://github.com/Ajrarn/fancy-cookbook/blob/3.0.0/groupsBodyRecipe.png "Groups")
 
 As you can see the numbering continue even if the lists are in different groups.
 
 ### Other optional properties
+
+#### `equipment`
+
+Use `equipment` to add a dedicated block listing the tools or utensils needed for the recipe. This block appears in the left column before the ingredient section.
+
+```typ
+#recipe(
+  [Pasta Primavera],
+  equipment: [
+    - large pot
+    - skillet
+    - wooden spoon
+  ],
+  ingredients: [
+    - pasta
+    - vegetables
+  ],
+  instructions: [
+    + Boil the pasta.
+    + Cook the vegetables.
+    + Mix everything in the skillet.
+  ]
+)
+```
 
 #### *image-primary* and *image-secondary*
 
@@ -183,8 +216,8 @@ Here is a small example of usage :
   description: [Base Dough for Pizza],
   label: <pizzaDough>
 )
-  
-  
+
+
 #recipe(
     [Peperoni Pizza],
     ingredients: [
@@ -219,7 +252,7 @@ I prefer to use dictionaries for my tags, it can help you avoid mistakes (differ
   description: [Sweet Jam],
   tags: (country.spain)
 )
-   
+
 #recipe(
   [Paella],
   description: [Very good],
@@ -258,6 +291,7 @@ And then you can add chapter and recipes. But you can customize your cookbook wi
 ### *paper*, *font-size* and *margin*
 
 The *paper* property defines the page size.
+
 You can see all available options in the [Page Function](https://typst.app/docs/reference/layout/page/) 
 reference, under the `paper` parameter.
 When you change the page size, you will likely need to adjust the *font-size* property as well.
@@ -373,8 +407,8 @@ When I have used these properties, I dit it with the *citation-block* function t
 * teal
 
 You can see them in action in two styles :
-* [palettes-flat.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/palettes-flat.pdf)
-* [palettes-gradient.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/palettes-gradient.pdf)
+* [palettes-flat.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/3.0.0/palettes-flat.pdf)
+* [palettes-gradient.pdf](https://github.com/Ajrarn/fancy-cookbook/blob/3.0.0/palettes-gradient.pdf)
 
 A palette is something like this :
 
@@ -586,8 +620,8 @@ Here is an example with locations and types :
   description: [Sweet Jam],
   tags: (country.france, type.dessert)
 )
-  
-  
+
+
 #recipe(
   [Paella],
   description: [Very good],
@@ -728,4 +762,4 @@ Or if you want to see the metadata of the recipes (with tags):
 ```
 
 ## Examples
-Finally, you can find examples in the [Github Project](https://github.com/Ajrarn/fancy-cookbook/blob/2.1.0/examples)
+Finally, you can find examples in the [Github Project](https://github.com/Ajrarn/fancy-cookbook/blob/3.0.0/examples)

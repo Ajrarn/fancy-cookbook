@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0]
+
+### New Features
+
+- Added an `equipment` block to `recipe` for listing tools and utensils used in a recipe.
+- Improved support for right-to-left writing systems and more robust column layout handling for LTR/RTL content.
+- Added custom font support via the `fonts` option on the `cookbook` function.
+- Added or improved language support for Arabic, Japanese, Korean, Dutch, Russian, and Chinese, alongside the existing translations.
+- Added validation helpers and test coverage for cookbook and recipe content.
+
+### Enhancements
+
+- Better handling of page layout, paper sizing, and margins for varied document formats.
+- Improved chapter, cover, TOC, and appendix behavior with more predictable page breaks.
+- More consistent recipe metadata, labels, and translation keys across the package.
+- Better support for custom i18n overrides and bibliography/quote/front-matter usage.
+
+---
+
 ## [2.1.0]
 
 ### New Features
@@ -151,7 +170,7 @@ To add pages before and after all the content. Useful for publication.
 
 #### citation-block
 A new function to add quote blocks in chapter everywhere.
- 
+  
 ## [1.0.0]
 
 - Initial release.
