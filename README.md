@@ -20,7 +20,7 @@ You can use this template in the Typst web app by clicking "Start from template"
 Alternatively, you can use the CLI:
 
 ```bash
-typst init @preview/fancy-cookbook
+typst init @local/fancy-cookbook
 ```
 
 ## What's in it ?

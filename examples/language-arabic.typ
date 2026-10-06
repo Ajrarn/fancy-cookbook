@@ -1,4 +1,4 @@
-#import "@preview/fancy-cookbook:3.0.0": *
+#import "@local/fancy-cookbook:3.0.0": *
 #set text(lang: "ar")
 
 #show: cookbook.with(
