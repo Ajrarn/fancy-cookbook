@@ -18,6 +18,10 @@
   servings: 6,
   prep-time: [2 min],
   cook-time: [10 min],
+  equipment: [
+    - Thermomix
+    - Moulin à poivre
+  ],
   ingredients:[
     - *1 l* of water
     - *350 ml* of fruit juice

@@ -103,6 +103,7 @@
 
 
 #let check-recipe(name,
+  equipment,
   ingredients,
   instructions,
   description,
@@ -118,6 +119,7 @@
   sort-title
 ) = {
   check-type("name",name, (str,content))
+  check-type("equipment",equipment, (str,content), with-none: true)
   check-ingredients(ingredients)
   check-instructions(instructions)
   check-type("description",description, (str,content), with-none: true)

@@ -27,6 +27,7 @@
 
 #let recipe(
   name,
+  equipment: none,
   ingredients: [],
   instructions: [],
   description: none,
@@ -44,6 +45,7 @@
 
   check-recipe(
     name,
+    equipment,
     ingredients,
     instructions,
     description,
@@ -129,6 +131,36 @@
       v(0.5em)
     }
     let style = style-state.get()
+
+    // equipment
+    if equipment != none {
+      block(
+        fill: white,
+        inset: 1.2em,
+        radius: 4pt,
+        width: 100%,
+        stroke: 0.5pt + current-palette.medium,
+      )[
+        #text(font: fonts-state.get().header, weight: "bold", size: 1.1em, translate(i18n-words.equipment))
+        
+        #set list(
+          marker: box(
+            height: 0.8em, width: 0.8em,
+            stroke: 1pt + current-palette.dark,
+            radius: 2pt,
+            baseline: 20%,
+          ),
+          spacing: 1.5em,
+          body-indent: 0.8em
+        )
+        
+        #v(0.8em)
+        #set text(size: 0.95em)
+        #equipment        
+      ]
+    }
+
+    
 
     block(
       fill: fill-ingredients(style, current-palette),
