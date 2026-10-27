@@ -17,7 +17,7 @@
   if authors.len() == 1 {
     authors.at(0)
   } else if authors.len() == 2 {
-    authors.at(0) + " " + context translate(i1i18n-words8n.author_and) + " " + authors.at(1)
+    authors.at(0) + " " + context translate(i18n-words.author_and) + " " + authors.at(1)
   } else {
     let all_but_last = authors.slice(0, authors.len() - 1).join(", ")
     let last = authors.at(authors.len() - 1)
