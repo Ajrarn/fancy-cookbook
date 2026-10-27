@@ -176,7 +176,7 @@ You can add images to the recipe. By default, this image will be in the ingredie
 
 instead of just an image, you can put a dictionary with the column where you want to put the image and the content of the image.
 
-#### *notes* and *notes-secondary*
+#### *notes*
 ```typ
 #recipe(
   [Lychee whiskey],
