@@ -1,4 +1,4 @@
-#import "@preview/fancy-cookbook:3.0.0": *
+#import "@local/fancy-cookbook:3.0.0": *
 
 #let dict-one = (
   good: "Good",

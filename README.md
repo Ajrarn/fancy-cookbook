@@ -20,7 +20,7 @@ You can use this template in the Typst web app by clicking "Start from template"
 Alternatively, you can use the CLI:
 
 ```bash
-typst init @preview/fancy-cookbook
+typst init @local/fancy-cookbook
 ```
 
 ## What's in it ?
@@ -155,16 +155,26 @@ Use `equipment` to add a dedicated block listing the tools or utensils needed fo
 )
 ```
 
-#### *image-primary* and *image-secondary*
+#### *image*
 
 ```typ
 #recipe(
   [Lychee whiskey],
   description: [Perfumed Whisky],
-  image-primary: image("asset/whisky.png")  // image-secondary or both
+  image: image("asset/whisky.png")
 )
 ```
-You can add images to the recipe, one is for the left column and the other for the right one. This option can let you adjust your recipe to fit in one page if you want.
+You can add images to the recipe. By default, this image will be in the ingredients column, but you can change this with this syntax :
+
+```typ
+#recipe(
+  [Lychee whiskey],
+  description: [Perfumed Whisky],
+  image: (column: column.instructions, content: image("asset/whisky.png")),
+)
+```
+
+instead of just an image, you can put a dictionary with the column where you want to put the image and the content of the image.
 
 #### *notes* and *notes-secondary*
 ```typ
@@ -174,9 +184,16 @@ You can add images to the recipe, one is for the left column and the other for t
   notes: [If you add some coriander at the end, it will be amazing.]
 )
 ```
-notes will be placed in a block in the left column.
-This is the default behavior and that's why it's not named *notes-primary*.
-But sometimes, the only way for the recipe to fit in one page is to have notes on the right side, so you have *notes-secondary*.
+You can add notes to the recipe. By default, this note will be in the ingredients column, but you can change this with the same syntax as for the image:
+
+```typ
+#recipe(
+  [Lychee whiskey],
+  description: [Perfumed Whisky],
+  notes: (column: column.instructions, content: [If you add some coriander at the end, it will be amazing.]),
+)
+```
+
 
 #### authors
 
@@ -384,6 +401,27 @@ If you to print separatly the covers and the content like some services online, 
 
 When I have used these properties, I dit it with the *citation-block* function that is described below.
 
+### *fonts* and custom paper size
+
+The cookbook also accepts advanced typographic settings:
+
+```typ
+#show: cookbook.with(
+  title: "My Cookbook",
+  subtitle: "All that good",
+  font-size: 10pt,
+  fonts: (
+    body: "Libertinus Serif",
+    header: "Libertinus Serif",
+    mono: "Libertinus Mono"
+  ),
+  paper-width: 210mm,
+  paper-height: 297mm
+)
+```
+
+`fonts` lets you override the body, header and monospace font families; `paper-width` and `paper-height` can be used together to customize the page size when needed.
+
 ### *colors* and *style*
 
 *fancy-cookbook* loves colors and is available with 17 colored palettes:
@@ -471,24 +509,32 @@ To set the gradient style for your book you can write:
 
 ### custom-i18n
 
-Translations is a part of this package.
-I have provided 4 languages in this version (and you can suggest others if you want on Github), but you can also provide your own version of the different labels.
+Translations are part of this package.
+I provide 12 built-in languages in this version, and you can also define your own labels if needed.
 
-The 4 languages are :
-* **fr** : for french
-* **en** : for english
-* **es** for spanish
-* **pt** : for portuguese
+Available languages:
+* **ar** : Arabic
+* **de** : German
+* **en** : English
+* **es** : Spanish
+* **fr** : French
+* **it** : Italian
+* **ja** : Japanese
+* **ko** : Korean
+* **nl** : Dutch
+* **pt** : Portuguese
+* **ru** : Russian
+* **zh** : Chinese
 
-To set the current language in any part of the document you can use this instruction (which I recommend you to do every time, in all your document), example with french :
+To set the current language in any part of the document, use:
 
 ```typ
-#set text(lang:"fr")
+#set text(lang: "fr")
 ```
 
-Do it before calling the *cookbook* function. You can also switch between recipe your language with this instruction, but I don't know why you would do that.
+This should be done before calling the `cookbook` function. You can also switch languages within a recipe if needed, but most of the time you will set it once at the document level.
 
-Another way is to set the property *lang* of the *cookbook* function:
+Another way is to set the `lang` property on the `cookbook` function:
 
 ```typ
 #show: cookbook.with(
@@ -497,25 +543,28 @@ Another way is to set the property *lang* of the *cookbook* function:
 )
 ```
 
-But this will apply the language only for the cookbook itself, your document will "stay" in English.
-
+This only affects the cookbook itself; the rest of the document will keep its current language.
 
 #### What can you do if your language is missing ?
-You can add your own language by setting a dictionary with the labels to translate and use the *custom-18n* property. Here is the English version :
+You can add your own language by creating a dictionary and passing it via the `custom-i18n` property. Here is the English example:
 
 ```typ
 #let english = (
-    en: (
-      appendices: "Appendices",
-      author: "AUTHOR",
-      authors: "AUTHORS",
-      index: "Thematic Index",
-      ingredients: "INGREDIENTS",
-      notes: "CHEF'S NOTES",
-      page-short: "p.", // this will appear with labels and references
-      preparation: "PREPARATION",
-      toc: "Table of Contents"
-    )
+  en: (
+    appendices: "Appendices",
+    author: "AUTHOR",
+    authors: "AUTHORS",
+    author_and: "and",
+    equipment: "EQUIPMENT",
+    index: "Thematic Index",
+    ingredients: "INGREDIENTS",
+    notes: "CHEF'S NOTES",
+    preparation: "PREPARATION",
+    toc: "Table of Contents",
+    page-numbering: "1",
+    page-ref-numbering: "p. 1",
+    step-numbering: "1"
+  )
 )
 
 #show: cookbook.with(
@@ -523,17 +572,34 @@ You can add your own language by setting a dictionary with the labels to transla
   custom-i18n: english
 )
 ```
-And it will add your dictionary to the others. But you need to set the languages (`#set text (lang:"fr")`) with the one you have just added.
 
-#### What if there is my language, but I want to use custom labels ?
-Because the English language already exists, the previous example will not really add English (but this is true for an unknown one), your version will replace mine.
-But you can also, only change one label at a time like this :
+The dictionary is merged with the built-in translations. If you already use a language that exists, your custom values override the default ones.
+
+The translation dictionary supports the following keys:
+* `appendices`
+* `author`
+* `authors`
+* `author_and` (used when formatting multiple authors)
+* `equipment`
+* `index`
+* `ingredients`
+* `notes`
+* `preparation`
+* `toc`
+* `page-numbering`
+* `page-ref-numbering`
+* `step-numbering`
+
+#### What if my language already exists, but I want custom labels ?
+You can override only the labels you want to change:
 
 ```typ
 #let english = (
-    en: (
-      toc: "Recipes"
-    )
+  en: (
+    toc: "Recipes",
+    page-ref-numbering: "p. 1",
+    author_and: "and"
+  )
 )
 
 #show: cookbook.with(
@@ -541,18 +607,17 @@ But you can also, only change one label at a time like this :
   custom-i18n: english
 )
 ```
-And only the toc label will be changed.
 
-### chapter-start-right
+### chapter-on-odd
 The chapters appear as a separation page with a big title in the middle (it's more like a part separation).
-I like it when this page is on the right side, so impair numbering page.
+I like it when this page is on the right side, so odd numbering page.
 
 If you like it too, just add this property set to true like this :
 
 ```typ
 #show: cookbook.with(
   title: "My Cookbook",
-  chapter-start-right: true
+  chapter-on-odd: true
 )
 ```
 ### custom-appendices
@@ -618,14 +683,14 @@ Here is an example with locations and types :
 #recipe(
   [Banana Jam],
   description: [Sweet Jam],
-  tags: (country.france, type.dessert)
+  tags: (location.france, type.dessert)
 )
 
 
 #recipe(
   [Paella],
   description: [Very good],
-  tags: (country.spain, type.meal)
+  tags: (location.spain, type.meal)
 )
 ```
 
