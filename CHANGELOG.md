@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Better handling of page layout, paper sizing, and margins for varied document formats.
 - Improved chapter, cover, TOC, and appendix behavior with more predictable page breaks.
 - More consistent recipe metadata, labels, and translation keys across the package.
+- Added numbering translation keys for page references and step numbering (`page-numbering`, `page-ref-numbering`, `step-numbering`).
 - Better support for custom i18n overrides and bibliography/quote/front-matter usage.
 
 ---
@@ -25,10 +26,11 @@ All notable changes to this project will be documented in this file.
 
 ### New Features
 
-Better control on paper size adjustment by addong: 
-- font-size : as the reference for all text
-- margin : for a better fit in different paper size.
+Better control of paper size adjustment by adding:
+- `font-size`: reference for all text
+- `margin`: better fit for different paper sizes
 
+---
 
 ## [2.0.0]
 
@@ -116,9 +118,9 @@ After (multiple authors):
 
 ---
 
-#### Replaced: `set-theme` → `chapter`, `next-palette`, `set-all-palettes`
+#### Replaced: `set-theme` → `chapter`, `set-all-palettes`
 
-The `set-theme` function has been replaced by three more specialized functions that give you finer control over color changes:
+The `set-theme` function has been replaced by more specialized APIs that give finer control over color changes:
 
 - **`chapter`**: creates a chapter separator page and sets the palette for that chapter.
 - **`set-all-palettes`**: lets you manually define all palette change points at once.
@@ -141,7 +143,7 @@ After:
 
 #### New palettes
 
-Six new palettes have been added:
+Seven new palettes have been added:
 
 - `amber`
 - `coral`
@@ -161,16 +163,18 @@ You can now change the palette directly from within a recipe using the `change-p
 
 ---
 
-#### `cookbook`: new `chapter-start-right` behavior
+#### `cookbook`: new `chapter-on-odd` behavior
 
-The `chapter` function now integrates with `chapter-start-right` to ensure chapter separator pages always land on the correct side.
+The `chapter` function now integrates with `chapter-on-odd` to ensure chapter separator pages land on the correct side.
 
 #### back-matter and front-matter
-To add pages before and after all the content. Useful for publication.
+
+Use these to add pages before and after the main content, which is useful for publication layouts.
 
 #### citation-block
-A new function to add quote blocks in chapter everywhere.
-  
+
+A new function to add quote blocks in chapters and elsewhere.
+
 ## [1.0.0]
 
 - Initial release.

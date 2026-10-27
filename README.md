@@ -509,32 +509,32 @@ To set the gradient style for your book you can write:
 
 ### custom-i18n
 
-Translations is a part of this package.
-I have provided 12 languages in this version (and you can suggest others if you want on Github), but you can also provide your own version of the different labels.
+Translations are part of this package.
+I provide 12 built-in languages in this version, and you can also define your own labels if needed.
 
-The available languages are :
-* **ar** : arabic
-* **de** : german
-* **en** : english
-* **es** : spanish
-* **fr** : french
-* **it** : italian
-* **ja** : japanese
-* **ko** : korean
-* **nl** : dutch
-* **pt** : portuguese
-* **ru** : russian
-* **zh** : chinese
+Available languages:
+* **ar** : Arabic
+* **de** : German
+* **en** : English
+* **es** : Spanish
+* **fr** : French
+* **it** : Italian
+* **ja** : Japanese
+* **ko** : Korean
+* **nl** : Dutch
+* **pt** : Portuguese
+* **ru** : Russian
+* **zh** : Chinese
 
-To set the current language in any part of the document you can use this instruction (which I recommend you to do every time, in all your document), example with french :
+To set the current language in any part of the document, use:
 
 ```typ
 #set text(lang: "fr")
 ```
 
-Do it before calling the *cookbook* function. You can also switch between recipe your language with this instruction, but I don't know why you would do that.
+This should be done before calling the `cookbook` function. You can also switch languages within a recipe if needed, but most of the time you will set it once at the document level.
 
-Another way is to set the property *lang* of the *cookbook* function:
+Another way is to set the `lang` property on the `cookbook` function:
 
 ```typ
 #show: cookbook.with(
@@ -543,10 +543,10 @@ Another way is to set the property *lang* of the *cookbook* function:
 )
 ```
 
-But this will apply the language only for the cookbook itself, your document will "stay" in English.
+This only affects the cookbook itself; the rest of the document will keep its current language.
 
 #### What can you do if your language is missing ?
-You can add your own language by setting a dictionary with the labels to translate and use the *custom-i18n* property. Here is the English version :
+You can add your own language by creating a dictionary and passing it via the `custom-i18n` property. Here is the English example:
 
 ```typ
 #let english = (
@@ -554,6 +554,7 @@ You can add your own language by setting a dictionary with the labels to transla
     appendices: "Appendices",
     author: "AUTHOR",
     authors: "AUTHORS",
+    author_and: "and",
     equipment: "EQUIPMENT",
     index: "Thematic Index",
     ingredients: "INGREDIENTS",
@@ -572,22 +573,32 @@ You can add your own language by setting a dictionary with the labels to transla
 )
 ```
 
-And it will add your dictionary to the others. But you need to set the languages (`#set text(lang: "fr")`) with the one you have just added.
+The dictionary is merged with the built-in translations. If you already use a language that exists, your custom values override the default ones.
 
-The dictionary also accepts the numbering keys used by the template:
-* `page-numbering`: page number format
-* `page-ref-numbering`: label/reference format (for example `p. 17`)
-* `step-numbering`: step numbering format
+The translation dictionary supports the following keys:
+* `appendices`
+* `author`
+* `authors`
+* `author_and` (used when formatting multiple authors)
+* `equipment`
+* `index`
+* `ingredients`
+* `notes`
+* `preparation`
+* `toc`
+* `page-numbering`
+* `page-ref-numbering`
+* `step-numbering`
 
-#### What if there is my language, but I want to use custom labels ?
-Because the English language already exists, the previous example will not really add English (but this is true for an unknown one), your version will replace mine.
-But you can also, only change one property at a time like this :
+#### What if my language already exists, but I want custom labels ?
+You can override only the labels you want to change:
 
 ```typ
 #let english = (
   en: (
     toc: "Recipes",
-    page-ref-numbering: "p. 1"
+    page-ref-numbering: "p. 1",
+    author_and: "and"
   )
 )
 
